@@ -5,48 +5,56 @@ const pages = [
   {
     num: 1,
     name: "Cover Page",
+    icon: "\u{1F319}",
     howToUse:
       "Your bundle cover. Keeps everything together when printed. Consider laminating or using a binder cover.",
   },
   {
     num: 2,
     name: "Rotating Shift Scheduler",
+    icon: "\u{1F4C5}",
     howToUse:
-      "Fill in at the start of each month. Use D/N/OFF codes. Great for tracking your 2-4 week rotation pattern. Pin to your fridge or keep in your work bag.",
+      "Fill in at the start of each month. Use D/N/OFF codes. Track your 2-4 week rotation. Pin to your fridge or keep in your work bag.",
   },
   {
     num: 3,
     name: "SBAR Patient Handoff Sheet",
+    icon: "\u{1F4CB}",
     howToUse:
-      "One per patient per shift. Fill in during your shift, use during bedside report. The SBAR format ensures you never miss critical handoff info. Print extras - you'll need multiple per shift.",
+      "One per patient per shift. Fill in during your shift, use during bedside report. Print extras \u2014 you'll need multiple per shift.",
   },
   {
     num: 4,
     name: "Hourly Medication & Task Timeline",
+    icon: "\u{1F48A}",
     howToUse:
-      "Start each shift by filling in patient info. Check off meds, vitals, and tasks as you complete them. Use the Details column for specifics. Great for orientation or high-acuity patients.",
+      "Start each shift by filling in patient info. Check off meds, vitals, and tasks. Use the Details column for specifics.",
   },
   {
     num: 5,
     name: "Daily Fatigue & Self-Care Tracker",
+    icon: "\u{1F9EC}",
     howToUse:
-      "Rate fatigue after each shift (1-10). Track sleep, caffeine, and mood weekly. Use the self-care checklist daily. Patterns will emerge - use them to adjust your routine.",
+      "Rate fatigue after each shift (1-10). Track sleep, caffeine, and mood weekly. Use the self-care checklist daily.",
   },
   {
     num: 6,
     name: "Post-Shift Sleep Recovery Checklist",
+    icon: "\u{1F634}",
     howToUse:
-      "Follow the wind-down steps chronologically after each night shift. Use the Recovery Day Planner on your off days. Audit your sleep environment weekly.",
+      "Follow the wind-down steps after each night shift. Use the Recovery Day Planner on your off days.",
   },
   {
     num: 7,
     name: "Night Shift Tips & Self-Care Prompts",
+    icon: "\u{1F4A1}",
     howToUse:
-      "Reference page. Keep visible (fridge, locker, or desk). Use snack ideas for meal prep. Monitor burnout signs monthly. Share coping strategies with your team.",
+      "Reference page. Keep visible (fridge, locker, or desk). Use snack ideas for meal prep. Monitor burnout signs monthly.",
   },
   {
     num: 8,
     name: "How to Use (This Page)",
+    icon: "\u{1F4D6}",
     howToUse:
       "You're reading it! Remove this page once you're familiar with the bundle. Or keep it as a reference.",
   },
@@ -57,7 +65,7 @@ const tips = [
   "Use a clipboard with storage to carry your active sheets during shift.",
   "Laminate the scheduler and tips page for reuse with dry-erase markers.",
   "Store completed trackers in a binder to spot long-term patterns.",
-  "Share with your unit - night shift teams benefit from consistent tools.",
+  "Share with your unit \u2014 night shift teams benefit from consistent tools.",
   "Use on a tablet with a stylus for a paperless option (iPad + GoodNotes works well).",
 ];
 
@@ -65,9 +73,9 @@ export default function HowToUsePage() {
   return (
     <Page size="LETTER" style={sharedStyles.page}>
       {/* Header */}
-      <View style={{ marginBottom: 6 }}>
+      <View style={sharedStyles.pageHeader}>
         <Text style={sharedStyles.headerBadge}>Getting Started</Text>
-        <Text style={[sharedStyles.pageTitle, { marginTop: 4 }]}>
+        <Text style={[sharedStyles.pageTitle, { marginTop: 8 }]}>
           How to Use This Bundle
         </Text>
         <Text style={sharedStyles.pageSubtitle}>
@@ -81,15 +89,21 @@ export default function HowToUsePage() {
           key={page.num}
           style={{
             flexDirection: "row",
-            marginBottom: 4,
-            gap: 6,
+            marginBottom: 5,
+            gap: 8,
+            paddingTop: 5,
+            paddingBottom: 5,
+            paddingLeft: 8,
+            paddingRight: 8,
+            borderRadius: 4,
+            backgroundColor: page.num % 2 === 0 ? colors.offWhite : colors.white,
           }}
         >
           <View
             style={{
-              width: 22,
-              height: 22,
-              borderRadius: 11,
+              width: 24,
+              height: 24,
+              borderRadius: 12,
               backgroundColor: colors.tealPale,
               justifyContent: "center",
               alignItems: "center",
@@ -107,17 +121,25 @@ export default function HowToUsePage() {
             </Text>
           </View>
           <View style={{ flex: 1 }}>
+            <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 1 }}>
+              <Text style={{ fontSize: 8, marginRight: 4 }}>{page.icon}</Text>
+              <Text
+                style={{
+                  fontSize: 9,
+                  fontFamily: "Helvetica-Bold",
+                  color: colors.deepNavy,
+                }}
+              >
+                {page.name}
+              </Text>
+            </View>
             <Text
               style={{
-                fontSize: 9,
-                fontFamily: "Helvetica-Bold",
-                color: colors.deepNavy,
-                marginBottom: 2,
+                fontSize: 7,
+                color: colors.textMid,
+                lineHeight: 1.4,
               }}
             >
-              {page.name}
-            </Text>
-            <Text style={{ fontSize: 7.5, color: colors.textMid, lineHeight: 1.4 }}>
               {page.howToUse}
             </Text>
           </View>
@@ -125,16 +147,20 @@ export default function HowToUsePage() {
       ))}
 
       {/* Pro Tips */}
-      <View style={{ marginTop: 4 }}>
-        <Text style={sharedStyles.sectionTitle}>Pro Tips</Text>
+      <View style={{ marginTop: 6 }}>
+        <Text style={sharedStyles.sectionTitle}>
+          {"\u{1F4A1}"} Pro Tips
+        </Text>
         <View
           style={{
             backgroundColor: colors.ice,
             paddingTop: 6,
             paddingBottom: 6,
-            paddingLeft: 8,
-            paddingRight: 8,
+            paddingLeft: 10,
+            paddingRight: 10,
             borderRadius: 4,
+            borderWidth: 0.5,
+            borderColor: colors.tealPale,
           }}
         >
           {tips.map((tip, i) => (
@@ -143,23 +169,23 @@ export default function HowToUsePage() {
               style={{
                 flexDirection: "row",
                 alignItems: "flex-start",
-                marginBottom: 2,
+                marginBottom: 3,
               }}
             >
               <Text
                 style={{
-                  fontSize: 8,
+                  fontSize: 7,
                   fontFamily: "Helvetica-Bold",
                   color: colors.ocean,
-                  marginRight: 6,
-                  width: 12,
+                  marginRight: 5,
+                  width: 10,
                 }}
               >
                 {i + 1}.
               </Text>
               <Text
                 style={{
-                  fontSize: 8,
+                  fontSize: 7,
                   color: colors.textDark,
                   flex: 1,
                   lineHeight: 1.4,
@@ -175,14 +201,16 @@ export default function HowToUsePage() {
       {/* Thank you note */}
       <View
         style={{
-          marginTop: 6,
-          paddingTop: 6,
-          paddingBottom: 6,
-          paddingLeft: 10,
-          paddingRight: 10,
+          marginTop: 8,
+          paddingTop: 8,
+          paddingBottom: 8,
+          paddingLeft: 12,
+          paddingRight: 12,
           backgroundColor: colors.tealPale,
           borderRadius: 4,
           alignItems: "center",
+          borderWidth: 0.5,
+          borderColor: colors.tealMuted,
         }}
       >
         <Text
@@ -190,14 +218,14 @@ export default function HowToUsePage() {
             fontSize: 10,
             fontFamily: "Helvetica-Bold",
             color: colors.teal,
-            marginBottom: 4,
+            marginBottom: 3,
           }}
         >
           Thank You for Choosing This Bundle
         </Text>
         <Text
           style={{
-            fontSize: 8,
+            fontSize: 7,
             color: colors.textMid,
             textAlign: "center",
             lineHeight: 1.5,
@@ -211,12 +239,9 @@ export default function HowToUsePage() {
       {/* Footer */}
       <View style={sharedStyles.footer}>
         <Text style={sharedStyles.footerText}>
-          2026 Night Shift Nurse Survival Bundle
+          {"\u263E"} 2026 Night Shift Nurse Survival Bundle
         </Text>
-        <Text
-          render={({ pageNumber }) => `Page ${pageNumber} of 8`}
-          style={sharedStyles.footerText}
-        />
+        <Text style={sharedStyles.footerText}>Page 8 of 8</Text>
       </View>
     </Page>
   );

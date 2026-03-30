@@ -1,30 +1,42 @@
 import { Page, View, Text } from "@react-pdf/renderer";
-import { colors, pageWidth, pageHeight, sharedStyles } from "./styles";
+import { colors, pageHeight, sharedStyles } from "./styles";
 
 export default function CoverPage() {
   return (
     <Page size="LETTER" style={{ padding: 0, backgroundColor: colors.midnight }}>
-      {/* Top gradient band */}
+      {/* Main background */}
       <View
         style={{
           position: "absolute",
           top: 0,
           left: 0,
           right: 0,
-          height: pageHeight * 0.55,
+          height: pageHeight * 0.6,
           backgroundColor: colors.deepNavy,
         }}
       />
 
-      {/* Teal accent stripe */}
+      {/* Left accent bar */}
       <View
         style={{
           position: "absolute",
           top: 0,
           left: 0,
-          width: 8,
+          width: 6,
           height: pageHeight,
           backgroundColor: colors.teal,
+        }}
+      />
+
+      {/* Top accent line */}
+      <View
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 3,
+          backgroundColor: colors.tealLight,
         }}
       />
 
@@ -37,7 +49,7 @@ export default function CoverPage() {
           right: 0,
           bottom: 0,
           padding: 60,
-          paddingTop: 90,
+          paddingTop: 100,
           justifyContent: "space-between",
         }}
       >
@@ -50,10 +62,10 @@ export default function CoverPage() {
               alignSelf: "flex-start",
               paddingTop: 5,
               paddingBottom: 5,
-              paddingLeft: 14,
-              paddingRight: 14,
-              borderRadius: 3,
-              marginBottom: 30,
+              paddingLeft: 16,
+              paddingRight: 16,
+              borderRadius: 12,
+              marginBottom: 36,
             }}
           >
             <Text
@@ -61,7 +73,7 @@ export default function CoverPage() {
                 fontSize: 8,
                 fontFamily: "Helvetica-Bold",
                 color: colors.white,
-                letterSpacing: 1.5,
+                letterSpacing: 2,
                 textTransform: "uppercase",
               }}
             >
@@ -69,147 +81,184 @@ export default function CoverPage() {
             </Text>
           </View>
 
-          {/* Moon illustration (simple circle) */}
+          {/* Moon icon */}
           <View
             style={{
-              width: 80,
-              height: 80,
-              borderRadius: 40,
-              backgroundColor: "rgba(255,255,255,0.08)",
-              marginBottom: 20,
+              width: 90,
+              height: 90,
+              borderRadius: 45,
+              borderWidth: 1.5,
+              borderColor: "rgba(43,168,154,0.25)",
+              marginBottom: 24,
               justifyContent: "center",
               alignItems: "center",
             }}
           >
             <View
               style={{
-                width: 60,
-                height: 60,
-                borderRadius: 30,
-                backgroundColor: "rgba(255,255,255,0.12)",
+                width: 70,
+                height: 70,
+                borderRadius: 35,
+                backgroundColor: "rgba(43,168,154,0.08)",
                 justifyContent: "center",
                 alignItems: "center",
               }}
             >
-              <Text style={{ fontSize: 28 }}>{"\u263E"}</Text>
+              <Text style={{ fontSize: 32, color: colors.tealLight }}>
+                {"\u263E"}
+              </Text>
             </View>
           </View>
 
           {/* Title */}
           <Text
             style={{
-              fontSize: 32,
+              fontSize: 36,
               fontFamily: "Helvetica-Bold",
               color: colors.white,
-              lineHeight: 1.2,
-              marginBottom: 8,
+              lineHeight: 1.15,
+              marginBottom: 6,
             }}
           >
             2026 Night Shift
           </Text>
           <Text
             style={{
-              fontSize: 32,
+              fontSize: 36,
               fontFamily: "Helvetica-Bold",
               color: colors.tealLight,
-              lineHeight: 1.2,
-              marginBottom: 14,
+              lineHeight: 1.15,
+              marginBottom: 20,
             }}
           >
             Nurse Survival Bundle
           </Text>
 
-          {/* Subtitle */}
+          {/* Divider */}
+          <View
+            style={{
+              width: 50,
+              height: 2,
+              backgroundColor: colors.teal,
+              marginBottom: 20,
+              borderRadius: 1,
+            }}
+          />
+
+          {/* Subtitles */}
           <Text
             style={{
-              fontSize: 13,
+              fontSize: 12,
               color: colors.oceanLight,
-              lineHeight: 1.5,
-              maxWidth: 360,
-              marginBottom: 20,
+              lineHeight: 1.6,
+              maxWidth: 380,
+              marginBottom: 4,
             }}
           >
-            Shift Scheduler - SBAR Handoff - Med Timeline
+            Shift Scheduler · SBAR Handoff · Med Timeline
           </Text>
           <Text
             style={{
-              fontSize: 13,
+              fontSize: 12,
               color: colors.oceanLight,
-              lineHeight: 1.5,
-              maxWidth: 360,
+              lineHeight: 1.6,
+              maxWidth: 380,
             }}
           >
-            Fatigue Tracker - Sleep Recovery - Self-Care
+            Fatigue Tracker · Sleep Recovery · Self-Care
           </Text>
         </View>
 
         {/* Bottom section */}
         <View>
-          {/* Divider */}
           <View
             style={{
-              height: 1,
-              backgroundColor: colors.teal,
-              width: 60,
-              marginBottom: 16,
-            }}
-          />
-
-          <Text
-            style={{
-              fontSize: 9,
-              color: "rgba(255,255,255,0.4)",
-              letterSpacing: 0.5,
+              flexDirection: "row",
+              gap: 20,
+              marginBottom: 12,
             }}
           >
-            8 Printable Pages | Designed for 12-Hour Night Shift RNs
-          </Text>
-          <Text
-            style={{
-              fontSize: 9,
-              color: "rgba(255,255,255,0.3)",
-              letterSpacing: 0.5,
-              marginTop: 4,
-            }}
-          >
-            Print unlimited copies or use on your tablet
-          </Text>
+            <Text
+              style={{
+                fontSize: 9,
+                color: "rgba(255,255,255,0.45)",
+                letterSpacing: 0.5,
+              }}
+            >
+              8 Printable Pages
+            </Text>
+            <Text
+              style={{
+                fontSize: 9,
+                color: "rgba(255,255,255,0.3)",
+              }}
+            >
+              |
+            </Text>
+            <Text
+              style={{
+                fontSize: 9,
+                color: "rgba(255,255,255,0.45)",
+                letterSpacing: 0.5,
+              }}
+            >
+              12-Hour Night Shift RNs
+            </Text>
+            <Text
+              style={{
+                fontSize: 9,
+                color: "rgba(255,255,255,0.3)",
+              }}
+            >
+              |
+            </Text>
+            <Text
+              style={{
+                fontSize: 9,
+                color: "rgba(255,255,255,0.45)",
+                letterSpacing: 0.5,
+              }}
+            >
+              Print Unlimited
+            </Text>
+          </View>
         </View>
       </View>
 
-      {/* Stethoscope-inspired decorative elements */}
+      {/* Decorative circles */}
       <View
         style={{
           position: "absolute",
-          bottom: 60,
-          right: 50,
-          width: 120,
-          height: 120,
-          borderRadius: 60,
-          borderWidth: 1.5,
-          borderColor: "rgba(43,168,154,0.15)",
+          bottom: 50,
+          right: 45,
+          width: 130,
+          height: 130,
+          borderRadius: 65,
+          borderWidth: 1,
+          borderColor: "rgba(43,168,154,0.12)",
         }}
       />
       <View
         style={{
           position: "absolute",
-          bottom: 80,
-          right: 70,
-          width: 80,
-          height: 80,
-          borderRadius: 40,
-          borderWidth: 1,
-          borderColor: "rgba(43,168,154,0.1)",
+          bottom: 70,
+          right: 65,
+          width: 90,
+          height: 90,
+          borderRadius: 45,
+          borderWidth: 0.75,
+          borderColor: "rgba(43,168,154,0.08)",
         }}
       />
 
-      {/* Stars / dots */}
+      {/* Stars */}
       {[
-        { top: 120, right: 100, size: 3 },
-        { top: 200, right: 200, size: 2 },
-        { top: 80, right: 250, size: 2.5 },
-        { top: 160, right: 350, size: 2 },
-        { top: 100, right: 180, size: 1.5 },
+        { top: 110, right: 120, size: 2.5 },
+        { top: 180, right: 220, size: 2 },
+        { top: 90, right: 280, size: 3 },
+        { top: 150, right: 370, size: 1.5 },
+        { top: 200, right: 160, size: 2 },
+        { top: 130, right: 420, size: 2 },
       ].map((dot, i) => (
         <View
           key={i}
@@ -224,6 +273,19 @@ export default function CoverPage() {
           }}
         />
       ))}
+
+      {/* Stethoscope hint */}
+      <Text
+        style={{
+          position: "absolute",
+          bottom: 85,
+          right: 80,
+          fontSize: 24,
+          color: "rgba(43,168,154,0.12)",
+        }}
+      >
+        {"\u{1FA7A}"}
+      </Text>
     </Page>
   );
 }

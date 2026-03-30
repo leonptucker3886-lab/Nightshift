@@ -6,6 +6,7 @@ const sbarSections = [
     letter: "S",
     title: "Situation",
     subtitle: "What is going on with the patient?",
+    color: colors.ocean,
     fields: [
       "Patient Name / Room # / Bed",
       "Age / Sex / Code Status",
@@ -17,6 +18,7 @@ const sbarSections = [
     letter: "B",
     title: "Background",
     subtitle: "What is the clinical context?",
+    color: colors.teal,
     fields: [
       "Admission Date / Admitting Provider",
       "Relevant Medical / Surgical History",
@@ -28,6 +30,7 @@ const sbarSections = [
     letter: "A",
     title: "Assessment",
     subtitle: "What do I think is going on?",
+    color: colors.warmOrange,
     fields: [
       "Current Vital Signs (T / HR / BP / RR / SpO2)",
       "Pain Assessment (0-10, location, quality)",
@@ -39,6 +42,7 @@ const sbarSections = [
     letter: "R",
     title: "Recommendation",
     subtitle: "What do I need / suggest?",
+    color: colors.softGreen,
     fields: [
       "Pending Orders / Interventions Needed",
       "Anticipated Changes / Concerns to Watch",
@@ -48,18 +52,24 @@ const sbarSections = [
   },
 ];
 
+const sampleData: Record<string, string> = {
+  "Patient Name / Room # / Bed": "Maria Chen / Room 412-B",
+  "Age / Sex / Code Status": "67 / F / Full Code",
+  "Primary Diagnosis / Reason for Admission": "CHF exacerbation \u2014 increased SOB, weight gain",
+  "Current Concern / Issue": "O2 sat dropped to 89% on RA, now on 2L NC",
+};
+
 export default function HandoffSheet() {
   return (
     <Page size="LETTER" style={sharedStyles.page}>
       {/* Header */}
-      <View style={{ marginBottom: 10 }}>
+      <View style={sharedStyles.pageHeader}>
         <Text style={sharedStyles.headerBadge}>Patient Safety</Text>
         <Text style={[sharedStyles.pageTitle, { marginTop: 8 }]}>
           SBAR Patient Handoff / Report Sheet
         </Text>
         <Text style={sharedStyles.pageSubtitle}>
-          Structured communication for safe shift-to-shift handoffs. One sheet
-          per patient.
+          Structured communication for safe shift-to-shift handoffs. One sheet per patient.
         </Text>
       </View>
 
@@ -74,17 +84,24 @@ export default function HandoffSheet() {
           paddingRight: 12,
           borderRadius: 4,
           marginBottom: 12,
-          gap: 16,
+          gap: 12,
+          borderWidth: 0.5,
+          borderColor: colors.tealPale,
         }}
       >
         {["Patient Name", "Room / Bed", "Date", "Shift", "RN"].map((label) => (
-          <View key={label} style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
+          <View
+            key={label}
+            style={{ flex: 1, flexDirection: "row", alignItems: "center" }}
+          >
             <Text
               style={{
-                fontSize: 7,
+                fontSize: 6,
                 fontFamily: "Helvetica-Bold",
-                color: colors.textMid,
+                color: colors.teal,
                 marginRight: 4,
+                textTransform: "uppercase",
+                letterSpacing: 0.3,
               }}
             >
               {label}:
@@ -92,35 +109,33 @@ export default function HandoffSheet() {
             <View
               style={{
                 flex: 1,
-                borderBottomWidth: 0.5,
-                borderBottomColor: colors.mediumGray,
+                borderBottomWidth: 0.75,
+                borderBottomColor: colors.tealMuted,
                 paddingBottom: 1,
               }}
             >
-              <Text style={{ fontSize: 8, color: "transparent" }}>.</Text>
+              <Text style={{ fontSize: 7, color: "transparent" }}>.</Text>
             </View>
           </View>
         ))}
       </View>
 
       {/* SBAR Sections */}
-      {sbarSections.map((section) => (
-        <View key={section.letter} style={{ marginBottom: 10 }}>
-          {/* Section header */}
-          <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 6 }}>
+      {sbarSections.map((section, sectionIdx) => (
+        <View key={section.letter} style={{ marginBottom: 8 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginBottom: 5,
+            }}
+          >
             <View
               style={{
-                width: 26,
-                height: 26,
-                borderRadius: 13,
-                backgroundColor:
-                  section.letter === "S"
-                    ? colors.ocean
-                    : section.letter === "B"
-                      ? colors.teal
-                      : section.letter === "A"
-                        ? colors.warmOrange
-                        : colors.softGreen,
+                width: 28,
+                height: 28,
+                borderRadius: 14,
+                backgroundColor: section.color,
                 justifyContent: "center",
                 alignItems: "center",
                 marginRight: 8,
@@ -128,7 +143,7 @@ export default function HandoffSheet() {
             >
               <Text
                 style={{
-                  fontSize: 13,
+                  fontSize: 14,
                   fontFamily: "Helvetica-Bold",
                   color: colors.white,
                 }}
@@ -139,7 +154,7 @@ export default function HandoffSheet() {
             <View>
               <Text
                 style={{
-                  fontSize: 12,
+                  fontSize: 11,
                   fontFamily: "Helvetica-Bold",
                   color: colors.deepNavy,
                 }}
@@ -152,47 +167,81 @@ export default function HandoffSheet() {
             </View>
           </View>
 
-          {/* Fields */}
-          {section.fields.map((field) => (
-            <View
-              key={field}
-              style={{
-                marginLeft: 34,
-                marginBottom: 6,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 8,
-                  fontFamily: "Helvetica-Bold",
-                  color: colors.textMid,
-                  marginBottom: 3,
-                }}
-              >
-                {field}
-              </Text>
+          {section.fields.map((field) => {
+            const isSampleField = sectionIdx === 0 && sampleData[field];
+            return (
               <View
+                key={field}
                 style={{
-                  height: 22,
-                  borderWidth: 0.5,
-                  borderColor: colors.lightGray,
-                  borderRadius: 2,
-                  backgroundColor: colors.offWhite,
-                  paddingLeft: 4,
-                  justifyContent: "center",
+                  marginLeft: 36,
+                  marginBottom: 5,
                 }}
               >
-                <Text style={{ fontSize: 8, color: "transparent" }}>.</Text>
+                <Text
+                  style={{
+                    fontSize: 7,
+                    fontFamily: "Helvetica-Bold",
+                    color: colors.textMid,
+                    marginBottom: 2,
+                  }}
+                >
+                  {field}
+                </Text>
+                {isSampleField ? (
+                  <View style={sharedStyles.sampleBox}>
+                    <Text style={sharedStyles.sampleText}>
+                      {sampleData[field]}
+                    </Text>
+                  </View>
+                ) : (
+                  <View
+                    style={{
+                      height: 22,
+                      borderBottomWidth: 0.75,
+                      borderBottomColor: colors.lightGray,
+                      backgroundColor: colors.offWhite,
+                      paddingLeft: 4,
+                      justifyContent: "center",
+                      borderRadius: 2,
+                    }}
+                  >
+                    <Text style={{ fontSize: 7, color: "transparent" }}>.</Text>
+                  </View>
+                )}
               </View>
-            </View>
-          ))}
+            );
+          })}
         </View>
       ))}
 
-      {/* Important notes / orders section */}
-      <View style={{ marginTop: 4 }}>
+      {/* Sample indicator */}
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          marginBottom: 6,
+        }}
+      >
+        <View
+          style={{
+            width: 8,
+            height: 8,
+            borderRadius: 4,
+            backgroundColor: colors.sampleBlue,
+            borderWidth: 0.5,
+            borderColor: "#B8D4E8",
+            marginRight: 4,
+          }}
+        />
+        <Text style={{ fontSize: 6, color: colors.sampleText, fontFamily: "Helvetica-Oblique" }}>
+          Blue highlighted entries show sample data filled in
+        </Text>
+      </View>
+
+      {/* Critical Orders */}
+      <View style={{ marginTop: 2 }}>
         <Text style={sharedStyles.sectionTitle}>
-          Critical Orders / Follow-Up Items
+          {"\u2757"} Critical Orders / Follow-Up Items
         </Text>
         {Array.from({ length: 3 }, (_, i) => (
           <View
@@ -200,14 +249,14 @@ export default function HandoffSheet() {
             style={{
               flexDirection: "row",
               alignItems: "center",
-              marginBottom: 4,
+              marginBottom: 5,
             }}
           >
             <View style={sharedStyles.checkbox} />
             <View
               style={{
                 flex: 1,
-                height: 16,
+                height: 18,
                 borderBottomWidth: 0.5,
                 borderBottomColor: colors.lightGray,
               }}
@@ -219,12 +268,9 @@ export default function HandoffSheet() {
       {/* Footer */}
       <View style={sharedStyles.footer}>
         <Text style={sharedStyles.footerText}>
-          2026 Night Shift Nurse Survival Bundle
+          {"\u263E"} 2026 Night Shift Nurse Survival Bundle
         </Text>
-        <Text
-          render={({ pageNumber }) => `Page ${pageNumber} of 8`}
-          style={sharedStyles.footerText}
-        />
+        <Text style={sharedStyles.footerText}>Page 3 of 8</Text>
       </View>
     </Page>
   );

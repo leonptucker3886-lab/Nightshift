@@ -2,7 +2,7 @@ import { Page, View, Text } from "@react-pdf/renderer";
 import { colors, sharedStyles } from "./styles";
 
 const snackIdeas = [
-  { time: "Pre-Shift (1800-1900)", items: "Balanced meal: protein + complex carbs + veggies" },
+  { time: "Pre-Shift (1800–1900)", items: "Balanced meal: protein + complex carbs + veggies" },
   { time: "First Break (~2100)", items: "Greek yogurt + berries, hummus + veggies" },
   { time: "Mid-Shift (~0000)", items: "Trail mix, cheese + whole grain crackers, apple + PB" },
   { time: "Late Shift (~0300)", items: "Hard-boiled egg, banana, small handful of nuts" },
@@ -12,7 +12,7 @@ const snackIdeas = [
 const microBreaks = [
   { when: "Every 2 hours", what: "Walk to the break room and back. Stretch neck, shoulders, wrists." },
   { when: "Before each med pass", what: "3 deep breaths. Roll shoulders back. Unclench your jaw." },
-  { when: "After a code or stressful event", what: "5-minute decompression. Step outside if possible. Name 3 things you see." },
+  { when: "After a code", what: "5-minute decompression. Step outside if possible. Name 3 things you see." },
   { when: "Charting breaks", what: "Stand up every 20 min. Look away from screen (20-20-20 rule)." },
 ];
 
@@ -20,7 +20,7 @@ const burnoutSignals = [
   "Dreading shifts more than usual",
   "Snapping at colleagues or patients",
   "Cynicism about the profession",
-  "Physical symptoms: headaches, GI issues, insomnia on off-days",
+  "Physical symptoms: headaches, GI issues, insomnia",
   "Feeling numb or detached during patient care",
   "Using food/alcohol to cope more than usual",
 ];
@@ -30,7 +30,7 @@ const copingStrategies = [
   "Use your EAP (Employee Assistance Program)",
   "Set boundaries: say no to extra shifts when depleted",
   "Journal for 5 minutes post-shift to process",
-  "Remember your 'why' - reconnect with purpose",
+  "Remember your \u2018why' \u2014 reconnect with purpose",
   "Seek professional support if symptoms persist >2 weeks",
 ];
 
@@ -38,9 +38,9 @@ export default function TipsPage() {
   return (
     <Page size="LETTER" style={sharedStyles.page}>
       {/* Header */}
-      <View style={{ marginBottom: 6 }}>
+      <View style={sharedStyles.pageHeader}>
         <Text style={sharedStyles.headerBadge}>Quick Reference</Text>
-        <Text style={[sharedStyles.pageTitle, { marginTop: 4 }]}>
+        <Text style={[sharedStyles.pageTitle, { marginTop: 8 }]}>
           Night Shift Tips & Self-Care Prompts
         </Text>
         <Text style={sharedStyles.pageSubtitle}>
@@ -49,30 +49,27 @@ export default function TipsPage() {
       </View>
 
       {/* Snack Ideas */}
-      <View style={{ marginBottom: 8 }}>
+      <View style={{ marginBottom: 10 }}>
         <Text style={sharedStyles.sectionTitle}>
-          Night Shift Snack Ideas
+          {"\u{1F957}"} Night Shift Snack Ideas
         </Text>
-        {snackIdeas.map((snack) => (
+        {snackIdeas.map((snack, idx) => (
           <View
             key={snack.time}
             style={{
               flexDirection: "row",
-              marginBottom: 4,
+              marginBottom: 2,
               paddingTop: 4,
               paddingBottom: 4,
               paddingLeft: 8,
               paddingRight: 8,
-              backgroundColor:
-                snackIdeas.indexOf(snack) % 2 === 0
-                  ? colors.offWhite
-                  : colors.white,
-              borderRadius: 2,
+              backgroundColor: idx % 2 === 0 ? colors.offWhite : colors.white,
+              borderRadius: 3,
             }}
           >
             <Text
               style={{
-                width: 120,
+                width: 110,
                 fontSize: 7,
                 fontFamily: "Helvetica-Bold",
                 color: colors.teal,
@@ -88,28 +85,28 @@ export default function TipsPage() {
       </View>
 
       {/* Micro-Break Reminders */}
-      <View style={{ marginBottom: 8 }}>
+      <View style={{ marginBottom: 10 }}>
         <Text style={sharedStyles.sectionTitle}>
-          Micro-Break Reminders
+          {"\u23F1"} Micro-Break Reminders
         </Text>
         {microBreaks.map((brk) => (
           <View
             key={brk.when}
             style={{
               flexDirection: "row",
-              marginBottom: 6,
+              marginBottom: 5,
               gap: 8,
             }}
           >
             <View
               style={{
-                width: 90,
+                width: 85,
                 backgroundColor: colors.ocean,
                 paddingTop: 4,
                 paddingBottom: 4,
                 paddingLeft: 6,
                 paddingRight: 6,
-                borderRadius: 3,
+                borderRadius: 4,
               }}
             >
               <Text
@@ -124,7 +121,12 @@ export default function TipsPage() {
               </Text>
             </View>
             <Text
-              style={{ fontSize: 8, color: colors.textDark, flex: 1, lineHeight: 1.4 }}
+              style={{
+                fontSize: 8,
+                color: colors.textDark,
+                flex: 1,
+                lineHeight: 1.4,
+              }}
             >
               {brk.what}
             </Text>
@@ -133,19 +135,20 @@ export default function TipsPage() {
       </View>
 
       {/* Burnout Prevention */}
-      <View style={{ marginBottom: 8 }}>
+      <View style={{ marginBottom: 10 }}>
         <Text style={sharedStyles.sectionTitle}>
-          Burnout Warning Signs
+          {"\u26A0"} Burnout Warning Signs
         </Text>
         <View
           style={{
-            backgroundColor: "#FFF3E0",
+            backgroundColor: colors.warmOrangePale,
             paddingTop: 8,
             paddingBottom: 8,
             paddingLeft: 10,
             paddingRight: 10,
             borderRadius: 4,
-            marginBottom: 8,
+            borderWidth: 0.5,
+            borderColor: "#F0D9B5",
           }}
         >
           <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 4 }}>
@@ -161,14 +164,22 @@ export default function TipsPage() {
               >
                 <Text
                   style={{
-                    fontSize: 8,
+                    fontSize: 7,
                     color: colors.coral,
                     marginRight: 4,
+                    marginTop: 1,
                   }}
                 >
-                  {"\u26A0"}
+                  {"\u25CF"}
                 </Text>
-                <Text style={{ fontSize: 7, color: colors.textDark, flex: 1, lineHeight: 1.3 }}>
+                <Text
+                  style={{
+                    fontSize: 7,
+                    color: colors.textDark,
+                    flex: 1,
+                    lineHeight: 1.3,
+                  }}
+                >
                   {signal}
                 </Text>
               </View>
@@ -180,7 +191,7 @@ export default function TipsPage() {
       {/* Coping Strategies */}
       <View>
         <Text style={sharedStyles.sectionTitle}>
-          Coping Strategies
+          {"\u2705"} Coping Strategies
         </Text>
         <View
           style={{
@@ -190,6 +201,8 @@ export default function TipsPage() {
             paddingLeft: 10,
             paddingRight: 10,
             borderRadius: 4,
+            borderWidth: 0.5,
+            borderColor: colors.softGreenMuted,
           }}
         >
           {copingStrategies.map((strategy) => (
@@ -201,16 +214,15 @@ export default function TipsPage() {
                 marginBottom: 4,
               }}
             >
+              <View style={{ ...sharedStyles.checkbox, borderColor: colors.softGreen }} />
               <Text
                 style={{
                   fontSize: 8,
-                  color: colors.softGreen,
-                  marginRight: 5,
+                  color: colors.textDark,
+                  flex: 1,
+                  lineHeight: 1.4,
                 }}
               >
-                {"\u2713"}
-              </Text>
-              <Text style={{ fontSize: 8, color: colors.textDark, flex: 1, lineHeight: 1.3 }}>
                 {strategy}
               </Text>
             </View>
@@ -221,12 +233,9 @@ export default function TipsPage() {
       {/* Footer */}
       <View style={sharedStyles.footer}>
         <Text style={sharedStyles.footerText}>
-          2026 Night Shift Nurse Survival Bundle
+          {"\u263E"} 2026 Night Shift Nurse Survival Bundle
         </Text>
-        <Text
-          render={({ pageNumber }) => `Page ${pageNumber} of 8`}
-          style={sharedStyles.footerText}
-        />
+        <Text style={sharedStyles.footerText}>Page 7 of 8</Text>
       </View>
     </Page>
   );
