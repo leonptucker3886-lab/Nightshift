@@ -402,7 +402,7 @@ export default function SelfCareTracker() {
       </View>
 
       {/* Footer */}
-      <View style={sharedStyles.footer} fixed>
+      <View style={sharedStyles.footer}>
         <Text style={sharedStyles.footerText}>
           2026 Night Shift Nurse Survival Bundle
         </Text>
