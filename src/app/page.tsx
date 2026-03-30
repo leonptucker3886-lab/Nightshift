@@ -175,31 +175,24 @@ export default function Home() {
             </ul>
 
             <p className="text-base text-[#4A4A6A] leading-relaxed mb-4">
-              Instant PDF download - print as many copies as you need or use
-              digitally on your tablet. Perfect for rural hospital nurses, new
-              grads, or experienced night shifters fighting fatigue.
+              Print as many copies as you need or use digitally on your tablet.
+              Perfect for rural hospital nurses, new grads, or experienced night
+              shifters fighting fatigue.
             </p>
             <p className="text-sm text-[#8A8AA0] italic">
-              Created with real shift life in mind. Non-refundable due to
-              instant access.
+              Created with real shift life in mind.
             </p>
           </div>
 
-          {/* Price & Download */}
+          {/* Download */}
           <div className="bg-[#F8FAFB] rounded-xl p-8 mb-12 border border-[#E8ECF0]">
             <div className="text-center">
-              <div className="mb-2">
-                <span className="text-3xl font-bold text-[#1A7A6D]">$15</span>
-                <span className="text-sm text-[#8A8AA0] ml-2 line-through">
-                  $18
-                </span>
-              </div>
               <p className="text-sm text-[#4A4A6A] mb-6">
-                Full 8-page bundle. Instant digital download.
+                Full 8-page bundle. Free download.
               </p>
               <DownloadSection />
               <p className="text-xs text-[#8A8AA0] mt-4">
-                Instant download after purchase. Print unlimited copies.
+                Free download. Print unlimited copies.
               </p>
             </div>
           </div>
@@ -311,10 +304,10 @@ export default function Home() {
       <footer className="bg-[#0F1B2D] border-t border-[rgba(43,168,154,0.15)]">
         <div className="max-w-4xl mx-auto px-6 py-8 text-center">
           <p className="text-xs text-[rgba(255,255,255,0.3)]">
-            2026 Night Shift Nurse Survival Bundle - Digital Download
+            2026 Night Shift Nurse Survival Bundle
           </p>
           <p className="text-xs text-[rgba(255,255,255,0.2)] mt-1">
-            Non-refundable due to instant access. For personal use only.
+            Free printable PDF. For personal use only.
           </p>
         </div>
       </footer>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState } from "react";
 import { pdf } from "@react-pdf/renderer";
 import NightShiftBundlePDF from "./NightShiftBundlePDF";
 
@@ -26,7 +26,7 @@ function DownloadButtonInner({ blobUrl }: { blobUrl: string }) {
         <polyline points="7 10 12 15 17 10" />
         <line x1="12" y1="15" x2="12" y2="3" />
       </svg>
-      Download PDF Bundle - $15
+      Download Full Bundle (8 Pages)
     </a>
   );
 }
@@ -109,7 +109,7 @@ export default function PDFDownloader() {
         <polyline points="7 10 12 15 17 10" />
         <line x1="12" y1="15" x2="12" y2="3" />
       </svg>
-      Generate & Download PDF Bundle - $15
+      Generate & Download Full Bundle
     </button>
   );
 }
