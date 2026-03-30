@@ -2,311 +2,91 @@ import { Page, View, Text } from "@react-pdf/renderer";
 import { colors, sharedStyles } from "./styles";
 
 const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
-const selfCarePrompts = [
-  "Did I drink enough water during shift?",
-  "Did I eat a real meal (not just vending)?",
-  "Did I take my breaks (even 5 min)?",
-  "Did I stretch or move my body?",
-  "Did I connect with a colleague today?",
-  "Did I do something calming pre/post shift?",
-];
-
-const sampleFatigue = ["", "", "7", "5", "8", "6", ""];
-const sampleSleep = ["", "", "6", "7", "5", "8", ""];
-const sampleCaffeine = ["", "", "3", "2", "4", "1", ""];
-const sampleMood = ["", "", "3", "4", "2", "4", ""];
+const prompts = ["Drank enough water?", "Ate a real meal?", "Took breaks?", "Stretched?", "Connected with colleague?", "Did something calming?"];
+const sf = ["", "", "7", "5", "8", "6", ""];
+const ss = ["", "", "6", "7", "5", "8", ""];
+const sc = ["", "", "3", "2", "4", "1", ""];
+const sm = ["", "", "3", "4", "2", "4", ""];
 
 export default function SelfCareTracker() {
   return (
     <Page size="LETTER" style={sharedStyles.page}>
-      {/* Header */}
-      <View style={sharedStyles.pageHeader}>
-        <Text style={sharedStyles.headerBadge}>Wellness Tracking</Text>
-        <Text style={[sharedStyles.pageTitle, { marginTop: 8 }]}>
-          Daily Fatigue & Self-Care Tracker
-        </Text>
-        <Text style={sharedStyles.pageSubtitle}>
-          Rate your alertness 1–10 after each shift. Track self-care habits and spot patterns.
-        </Text>
-      </View>
+      <View style={{ flex: 1 }}>
+        <View style={sharedStyles.pageHeader}>
+          <Text style={sharedStyles.headerBadge}>Wellness Tracking</Text>
+          <Text style={[sharedStyles.pageTitle, { marginTop: 6 }]}>Daily Fatigue & Self-Care Tracker</Text>
+          <Text style={sharedStyles.pageSubtitle}>Rate your alertness 1–10 after each shift. Track habits and spot patterns.</Text>
+        </View>
 
-      {/* Week tracker */}
-      <View style={{ marginBottom: 10 }}>
-        <Text style={sharedStyles.sectionTitle}>
-          {"\u{1F4CA}"} Weekly Alertness Log
-        </Text>
-
-        {/* Table header */}
+        <Text style={sharedStyles.sectionTitle}>Weekly Alertness Log</Text>
         <View style={sharedStyles.tableHeader}>
-          <View style={{ width: 60 }}>
-            <Text style={sharedStyles.tableHeaderText}>Metric</Text>
-          </View>
-          {daysOfWeek.map((day) => (
-            <View key={day} style={{ flex: 1, alignItems: "center" }}>
-              <Text
-                style={{
-                  fontSize: 7,
-                  fontFamily: "Helvetica-Bold",
-                  color: colors.white,
-                }}
-              >
-                {day}
-              </Text>
-            </View>
-          ))}
+          <View style={{ width: 50 }}><Text style={sharedStyles.tableHeaderText}>Metric</Text></View>
+          {daysOfWeek.map((d) => (<View key={d} style={{ flex: 1, alignItems: "center" }}><Text style={{ fontSize: 5, fontFamily: "Helvetica-Bold", color: colors.white }}>{d}</Text></View>))}
         </View>
 
-        {/* Fatigue scale row */}
-        <View style={{ ...sharedStyles.tableRow, backgroundColor: colors.offWhite }}>
-          <View style={{ width: 60 }}>
-            <Text style={{ fontSize: 7, fontFamily: "Helvetica-Bold", color: colors.textDark }}>
-              Fatigue
-            </Text>
-            <Text style={{ fontSize: 5, color: colors.textLight }}>(1=fresh, 10=exhausted)</Text>
-          </View>
-          {daysOfWeek.map((day, i) => (
-            <View key={day} style={{ flex: 1, alignItems: "center" }}>
-              <View
-                style={{
-                  width: 26,
-                  height: 16,
-                  borderWidth: 0.75,
-                  borderColor: sampleFatigue[i] ? colors.teal : colors.tealMuted,
-                  backgroundColor: sampleFatigue[i] ? colors.tealPale : undefined,
-                  borderRadius: 2,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={{
-                  fontSize: 7,
-                  fontFamily: "Helvetica-Bold",
-                  color: sampleFatigue[i] ? colors.teal : "transparent",
+        {[
+          { label: "Fatigue (1-10)", data: sf },
+          { label: "Sleep (hrs)", data: ss },
+          { label: "Caffeine (#)", data: sc },
+          { label: "Mood (1-5)", data: sm },
+        ].map((row, ri) => (
+          <View key={row.label} style={ri % 2 === 0 ? { ...sharedStyles.tableRow, backgroundColor: colors.offWhite } : sharedStyles.tableRow}>
+            <View style={{ width: 50 }}>
+              <Text style={{ fontSize: 6, fontFamily: "Helvetica-Bold", color: colors.textDark }}>{row.label}</Text>
+            </View>
+            {daysOfWeek.map((_, i) => (
+              <View key={i} style={{ flex: 1, alignItems: "center" }}>
+                <View style={{
+                  width: 22, height: 14, borderWidth: 0.5,
+                  borderColor: row.data[i] ? colors.teal : colors.tealMuted,
+                  backgroundColor: row.data[i] ? colors.tealPale : undefined,
+                  borderRadius: 2, justifyContent: "center", alignItems: "center",
                 }}>
-                  {sampleFatigue[i] || "."}
-                </Text>
-              </View>
-            </View>
-          ))}
-        </View>
-
-        {/* Sleep hours row */}
-        <View style={sharedStyles.tableRow}>
-          <View style={{ width: 60 }}>
-            <Text style={{ fontSize: 7, fontFamily: "Helvetica-Bold", color: colors.textDark }}>
-              Sleep (hrs)
-            </Text>
-          </View>
-          {daysOfWeek.map((day, i) => (
-            <View key={day} style={{ flex: 1, alignItems: "center" }}>
-              <View
-                style={{
-                  width: 26,
-                  height: 16,
-                  borderWidth: 0.75,
-                  borderColor: sampleSleep[i] ? colors.teal : colors.tealMuted,
-                  backgroundColor: sampleSleep[i] ? colors.tealPale : undefined,
-                  borderRadius: 2,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={{
-                  fontSize: 7,
-                  fontFamily: "Helvetica-Bold",
-                  color: sampleSleep[i] ? colors.teal : "transparent",
-                }}>
-                  {sampleSleep[i] || "."}
-                </Text>
-              </View>
-            </View>
-          ))}
-        </View>
-
-        {/* Caffeine row */}
-        <View style={{ ...sharedStyles.tableRow, backgroundColor: colors.offWhite }}>
-          <View style={{ width: 60 }}>
-            <Text style={{ fontSize: 7, fontFamily: "Helvetica-Bold", color: colors.textDark }}>
-              Caffeine (#)
-            </Text>
-          </View>
-          {daysOfWeek.map((day, i) => (
-            <View key={day} style={{ flex: 1, alignItems: "center" }}>
-              <View
-                style={{
-                  width: 26,
-                  height: 16,
-                  borderWidth: 0.75,
-                  borderColor: sampleCaffeine[i] ? colors.teal : colors.tealMuted,
-                  backgroundColor: sampleCaffeine[i] ? colors.tealPale : undefined,
-                  borderRadius: 2,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={{
-                  fontSize: 7,
-                  fontFamily: "Helvetica-Bold",
-                  color: sampleCaffeine[i] ? colors.teal : "transparent",
-                }}>
-                  {sampleCaffeine[i] || "."}
-                </Text>
-              </View>
-            </View>
-          ))}
-        </View>
-
-        {/* Mood row */}
-        <View style={sharedStyles.tableRow}>
-          <View style={{ width: 60 }}>
-            <Text style={{ fontSize: 7, fontFamily: "Helvetica-Bold", color: colors.textDark }}>
-              Mood (1-5)
-            </Text>
-          </View>
-          {daysOfWeek.map((day, i) => (
-            <View key={day} style={{ flex: 1, alignItems: "center" }}>
-              <View
-                style={{
-                  width: 26,
-                  height: 16,
-                  borderWidth: 0.75,
-                  borderColor: sampleMood[i] ? colors.teal : colors.tealMuted,
-                  backgroundColor: sampleMood[i] ? colors.tealPale : undefined,
-                  borderRadius: 2,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={{
-                  fontSize: 7,
-                  fontFamily: "Helvetica-Bold",
-                  color: sampleMood[i] ? colors.teal : "transparent",
-                }}>
-                  {sampleMood[i] || "."}
-                </Text>
-              </View>
-            </View>
-          ))}
-        </View>
-
-        {/* Sample indicator */}
-        <View style={{ flexDirection: "row", alignItems: "center", marginTop: 4 }}>
-          <View style={{
-            width: 7, height: 7, borderRadius: 3.5,
-            backgroundColor: colors.tealPale, borderWidth: 0.5,
-            borderColor: colors.tealMuted, marginRight: 4,
-          }} />
-          <Text style={{ fontSize: 5, color: colors.sampleText, fontFamily: "Helvetica-Oblique" }}>
-            Teal cells show sample filled-in entries (Wed–Sat)
-          </Text>
-        </View>
-      </View>
-
-      {/* Self-care prompts checklist */}
-      <View style={{ marginBottom: 10 }}>
-        <Text style={sharedStyles.sectionTitle}>
-          {"\u2705"} Daily Self-Care Checklist
-        </Text>
-
-        <View style={{ flexDirection: "row", gap: 10 }}>
-          <View style={{ flex: 1 }}>
-            {selfCarePrompts.slice(0, 3).map((prompt) => (
-              <View
-                key={prompt}
-                style={{
-                  flexDirection: "row",
-                  alignItems: "flex-start",
-                  marginBottom: 4,
-                  paddingTop: 4,
-                  paddingBottom: 4,
-                  paddingLeft: 6,
-                  paddingRight: 6,
-                  backgroundColor: colors.softGreenPale,
-                  borderRadius: 3,
-                  borderWidth: 0.5,
-                  borderColor: colors.softGreenMuted,
-                }}
-              >
-                <View style={sharedStyles.checkbox} />
-                <Text style={{ fontSize: 7, color: colors.textDark, flex: 1, lineHeight: 1.3 }}>
-                  {prompt}
-                </Text>
+                  <Text style={{ fontSize: 6, fontFamily: "Helvetica-Bold", color: row.data[i] ? colors.teal : "transparent" }}>{row.data[i] || "."}</Text>
+                </View>
               </View>
             ))}
           </View>
-          <View style={{ flex: 1 }}>
-            {selfCarePrompts.slice(3, 6).map((prompt) => (
-              <View
-                key={prompt}
-                style={{
-                  flexDirection: "row",
-                  alignItems: "flex-start",
-                  marginBottom: 4,
-                  paddingTop: 4,
-                  paddingBottom: 4,
-                  paddingLeft: 6,
-                  paddingRight: 6,
-                  backgroundColor: colors.softGreenPale,
-                  borderRadius: 3,
-                  borderWidth: 0.5,
-                  borderColor: colors.softGreenMuted,
-                }}
-              >
-                <View style={sharedStyles.checkbox} />
-                <Text style={{ fontSize: 7, color: colors.textDark, flex: 1, lineHeight: 1.3 }}>
-                  {prompt}
-                </Text>
-              </View>
-            ))}
-          </View>
-        </View>
-      </View>
+        ))}
 
-      {/* Quick Action Prompts */}
-      <View>
-        <Text style={sharedStyles.sectionTitle}>
-          {"\u26A1"} Quick Action Prompts
-        </Text>
-        <View style={{ flexDirection: "row", gap: 6 }}>
-          {[
-            { emoji: "\u{1F4A7}", label: "HYDRATE", desc: "8oz water now" },
-            { emoji: "\u{1F9D8}", label: "STRETCH", desc: "2-min neck/shoulders" },
-            { emoji: "\u{1F4AC}", label: "CONNECT", desc: "Check in with a peer" },
-            { emoji: "\u{1F634}", label: "REST", desc: "Close eyes 5 min" },
-          ].map((action) => (
-            <View
-              key={action.label}
-              style={{
-                flex: 1,
-                paddingTop: 6,
-                paddingBottom: 6,
-                paddingLeft: 6,
-                paddingRight: 6,
-                backgroundColor: colors.lavenderPale,
-                borderRadius: 3,
-                alignItems: "center",
-                borderWidth: 0.5,
-                borderColor: "#D8CDE8",
-              }}
-            >
-              <Text style={{ fontSize: 12, marginBottom: 1 }}>{action.emoji}</Text>
-              <Text style={{ fontSize: 6, fontFamily: "Helvetica-Bold", color: colors.lavender }}>
-                {action.label}
-              </Text>
-              <Text style={{ fontSize: 5, color: colors.textMid, textAlign: "center" }}>
-                {action.desc}
-              </Text>
+        <View style={{ flexDirection: "row", alignItems: "center", marginTop: 2, marginBottom: 6 }}>
+          <View style={{ width: 5, height: 5, borderRadius: 2.5, backgroundColor: colors.tealPale, marginRight: 3 }} />
+          <Text style={{ fontSize: 4, color: colors.sampleText, fontFamily: "Helvetica-Oblique" }}>Teal cells = sample entries (Wed–Sat)</Text>
+        </View>
+
+        <Text style={sharedStyles.sectionTitle}>Daily Self-Care Checklist</Text>
+        <View style={{ flexDirection: "row", gap: 8 }}>
+          {[prompts.slice(0, 3), prompts.slice(3, 6)].map((col, ci) => (
+            <View key={ci} style={{ flex: 1 }}>
+              {col.map((p) => (
+                <View key={p} style={{ flexDirection: "row", alignItems: "flex-start", marginBottom: 3, paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, backgroundColor: colors.softGreenPale, borderRadius: 2, borderWidth: 0.5, borderColor: colors.softGreenMuted }}>
+                  <View style={sharedStyles.checkbox} />
+                  <Text style={{ fontSize: 6, color: colors.textDark, flex: 1, lineHeight: 1.2 }}>{p}</Text>
+                </View>
+              ))}
             </View>
           ))}
         </View>
+
+        <Text style={[sharedStyles.sectionTitle, { marginTop: 8 }]}>Quick Actions</Text>
+        <View style={{ flexDirection: "row", gap: 5 }}>
+          {[{ e: "\u{1F4A7}", l: "HYDRATE", d: "8oz water" }, { e: "\u{1F9D8}", l: "STRETCH", d: "2 min" }, { e: "\u{1F4AC}", l: "CONNECT", d: "Check in" }, { e: "\u{1F634}", l: "REST", d: "5 min eyes closed" }].map((a) => (
+            <View key={a.l} style={{ flex: 1, paddingTop: 5, paddingBottom: 5, paddingLeft: 4, paddingRight: 4, backgroundColor: colors.lavenderPale, borderRadius: 2, alignItems: "center", borderWidth: 0.5, borderColor: "#D8CDE8" }}>
+              <Text style={{ fontSize: 11 }}>{a.e}</Text>
+              <Text style={{ fontSize: 5, fontFamily: "Helvetica-Bold", color: colors.lavender }}>{a.l}</Text>
+              <Text style={{ fontSize: 4, color: colors.textMid }}>{a.d}</Text>
+            </View>
+          ))}
+        </View>
+
+        <View style={{ marginTop: 8 }}>
+          <Text style={sharedStyles.sectionTitle}>Notes</Text>
+          {Array.from({ length: 4 }, (_, i) => (<View key={i} style={sharedStyles.line} />))}
+        </View>
       </View>
 
-      {/* Footer */}
       <View style={sharedStyles.footer}>
-        <Text style={sharedStyles.footerText}>
-          {"\u263E"} 2026 Night Shift Nurse Survival Bundle
-        </Text>
+        <Text style={sharedStyles.footerText}>2026 Night Shift Nurse Survival Bundle</Text>
         <Text style={sharedStyles.footerText}>Page 5 of 8</Text>
       </View>
     </Page>
