@@ -10,10 +10,10 @@ const snackIdeas = [
 ];
 
 const microBreaks = [
-  { when: "Every 2 hours", what: "Walk to the break room and back. Stretch neck, shoulders, wrists." },
-  { when: "Before each med pass", what: "3 deep breaths. Roll shoulders back. Unclench your jaw." },
-  { when: "After a code", what: "5-minute decompression. Step outside if possible. Name 3 things you see." },
-  { when: "Charting breaks", what: "Stand up every 20 min. Look away from screen (20-20-20 rule)." },
+  { when: "Every 2 hours", what: "Walk to break room. Stretch neck, shoulders, wrists." },
+  { when: "Before med pass", what: "3 deep breaths. Roll shoulders back. Unclench jaw." },
+  { when: "After a code", what: "5-min decompression. Step outside. Name 3 things you see." },
+  { when: "Charting", what: "Stand up every 20 min. Look away from screen (20-20-20)." },
 ];
 
 const burnoutSignals = [
@@ -49,7 +49,7 @@ export default function TipsPage() {
       </View>
 
       {/* Snack Ideas */}
-      <View style={{ marginBottom: 10 }}>
+      <View style={{ marginBottom: 8 }}>
         <Text style={sharedStyles.sectionTitle}>
           {"\u{1F957}"} Night Shift Snack Ideas
         </Text>
@@ -58,26 +58,19 @@ export default function TipsPage() {
             key={snack.time}
             style={{
               flexDirection: "row",
-              marginBottom: 2,
-              paddingTop: 4,
-              paddingBottom: 4,
-              paddingLeft: 8,
-              paddingRight: 8,
+              marginBottom: 1,
+              paddingTop: 3,
+              paddingBottom: 3,
+              paddingLeft: 6,
+              paddingRight: 6,
               backgroundColor: idx % 2 === 0 ? colors.offWhite : colors.white,
-              borderRadius: 3,
+              borderRadius: 2,
             }}
           >
-            <Text
-              style={{
-                width: 110,
-                fontSize: 7,
-                fontFamily: "Helvetica-Bold",
-                color: colors.teal,
-              }}
-            >
+            <Text style={{ width: 105, fontSize: 6, fontFamily: "Helvetica-Bold", color: colors.teal }}>
               {snack.time}
             </Text>
-            <Text style={{ fontSize: 7, color: colors.textDark, flex: 1 }}>
+            <Text style={{ fontSize: 6, color: colors.textDark, flex: 1 }}>
               {snack.items}
             </Text>
           </View>
@@ -85,49 +78,28 @@ export default function TipsPage() {
       </View>
 
       {/* Micro-Break Reminders */}
-      <View style={{ marginBottom: 10 }}>
+      <View style={{ marginBottom: 8 }}>
         <Text style={sharedStyles.sectionTitle}>
           {"\u23F1"} Micro-Break Reminders
         </Text>
         {microBreaks.map((brk) => (
-          <View
-            key={brk.when}
-            style={{
-              flexDirection: "row",
-              marginBottom: 5,
-              gap: 8,
-            }}
-          >
+          <View key={brk.when} style={{ flexDirection: "row", marginBottom: 4, gap: 6 }}>
             <View
               style={{
-                width: 85,
+                width: 80,
                 backgroundColor: colors.ocean,
-                paddingTop: 4,
-                paddingBottom: 4,
-                paddingLeft: 6,
-                paddingRight: 6,
-                borderRadius: 4,
+                paddingTop: 3,
+                paddingBottom: 3,
+                paddingLeft: 5,
+                paddingRight: 5,
+                borderRadius: 3,
               }}
             >
-              <Text
-                style={{
-                  fontSize: 7,
-                  fontFamily: "Helvetica-Bold",
-                  color: colors.white,
-                  textAlign: "center",
-                }}
-              >
+              <Text style={{ fontSize: 6, fontFamily: "Helvetica-Bold", color: colors.white, textAlign: "center" }}>
                 {brk.when}
               </Text>
             </View>
-            <Text
-              style={{
-                fontSize: 8,
-                color: colors.textDark,
-                flex: 1,
-                lineHeight: 1.4,
-              }}
-            >
+            <Text style={{ fontSize: 7, color: colors.textDark, flex: 1, lineHeight: 1.3 }}>
               {brk.what}
             </Text>
           </View>
@@ -135,51 +107,25 @@ export default function TipsPage() {
       </View>
 
       {/* Burnout Prevention */}
-      <View style={{ marginBottom: 10 }}>
+      <View style={{ marginBottom: 8 }}>
         <Text style={sharedStyles.sectionTitle}>
           {"\u26A0"} Burnout Warning Signs
         </Text>
         <View
           style={{
             backgroundColor: colors.warmOrangePale,
-            paddingTop: 8,
-            paddingBottom: 8,
-            paddingLeft: 10,
-            paddingRight: 10,
-            borderRadius: 4,
-            borderWidth: 0.5,
-            borderColor: "#F0D9B5",
+            paddingTop: 6,
+            paddingBottom: 6,
+            paddingLeft: 8,
+            paddingRight: 8,
+            borderRadius: 3,
           }}
         >
-          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 4 }}>
+          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 2 }}>
             {burnoutSignals.map((signal) => (
-              <View
-                key={signal}
-                style={{
-                  flexDirection: "row",
-                  alignItems: "flex-start",
-                  width: "48%",
-                  marginBottom: 3,
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 7,
-                    color: colors.coral,
-                    marginRight: 4,
-                    marginTop: 1,
-                  }}
-                >
-                  {"\u25CF"}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 7,
-                    color: colors.textDark,
-                    flex: 1,
-                    lineHeight: 1.3,
-                  }}
-                >
+              <View key={signal} style={{ flexDirection: "row", alignItems: "flex-start", width: "48%", marginBottom: 2 }}>
+                <Text style={{ fontSize: 6, color: colors.coral, marginRight: 3, marginTop: 1 }}>{"\u25CF"}</Text>
+                <Text style={{ fontSize: 6, color: colors.textDark, flex: 1, lineHeight: 1.3 }}>
                   {signal}
                 </Text>
               </View>
@@ -196,33 +142,19 @@ export default function TipsPage() {
         <View
           style={{
             backgroundColor: colors.softGreenPale,
-            paddingTop: 8,
-            paddingBottom: 8,
-            paddingLeft: 10,
-            paddingRight: 10,
-            borderRadius: 4,
+            paddingTop: 6,
+            paddingBottom: 6,
+            paddingLeft: 8,
+            paddingRight: 8,
+            borderRadius: 3,
             borderWidth: 0.5,
             borderColor: colors.softGreenMuted,
           }}
         >
           {copingStrategies.map((strategy) => (
-            <View
-              key={strategy}
-              style={{
-                flexDirection: "row",
-                alignItems: "flex-start",
-                marginBottom: 4,
-              }}
-            >
-              <View style={{ ...sharedStyles.checkbox, borderColor: colors.softGreen }} />
-              <Text
-                style={{
-                  fontSize: 8,
-                  color: colors.textDark,
-                  flex: 1,
-                  lineHeight: 1.4,
-                }}
-              >
+            <View key={strategy} style={{ flexDirection: "row", alignItems: "flex-start", marginBottom: 3 }}>
+              <View style={{ ...sharedStyles.checkbox, borderColor: colors.softGreen, width: 9, height: 9 }} />
+              <Text style={{ fontSize: 7, color: colors.textDark, flex: 1, lineHeight: 1.3 }}>
                 {strategy}
               </Text>
             </View>

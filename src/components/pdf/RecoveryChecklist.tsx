@@ -9,7 +9,6 @@ const windDownSteps = [
       "Stop caffeine at least 6 hours before planned sleep",
       "Complete handoff using your SBAR sheet",
       "Hydrate with water (not energy drinks)",
-      "Set phone to Do Not Disturb",
     ],
   },
   {
@@ -18,21 +17,18 @@ const windDownSteps = [
     items: [
       "Wear blue-light blocking glasses if driving at dawn",
       "Listen to calming music or a sleep podcast",
-      "Avoid stimulating conversations or news",
       "Keep car cool to promote drowsiness",
     ],
   },
   {
-    time: "Arrival Home (Wind-Down)",
+    time: "Arrival Home",
     icon: "\u{1F3E0}",
     items: [
       "Do NOT check work email or schedule apps",
       "Light snack if hungry (protein + complex carbs)",
-      "Warm shower or bath to lower core temperature after",
-      "Change into sleep clothes immediately",
-      "Set room to 65–68F (18–20C)",
-      "Blackout curtains + eye mask ready",
-      "White noise machine or earplugs",
+      "Warm shower to lower core temperature after",
+      "Change into sleep clothes. Set room to 65–68F",
+      "Blackout curtains + eye mask + white noise ready",
     ],
   },
   {
@@ -41,7 +37,6 @@ const windDownSteps = [
     items: [
       "No screens 30 min before sleep (or use night mode)",
       "Brief breathing exercise: 4-7-8 technique",
-      "Write tomorrow's worries in a notebook, then close it",
       "Target 7–8 hours of sleep",
     ],
   },
@@ -77,30 +72,24 @@ export default function RecoveryChecklist() {
           backgroundColor: colors.goldPale,
           borderLeftWidth: 3,
           borderLeftColor: colors.warmOrange,
-          paddingTop: 8,
-          paddingBottom: 8,
-          paddingLeft: 12,
-          paddingRight: 12,
+          paddingTop: 7,
+          paddingBottom: 7,
+          paddingLeft: 10,
+          paddingRight: 10,
           borderRadius: 4,
-          marginBottom: 10,
+          marginBottom: 8,
           flexDirection: "row",
           alignItems: "center",
           borderWidth: 0.5,
           borderColor: "#F0D9B5",
         }}
       >
-        <Text style={{ fontSize: 20, marginRight: 10 }}>{"\u2615"}</Text>
+        <Text style={{ fontSize: 18, marginRight: 8 }}>{"\u2615"}</Text>
         <View>
-          <Text
-            style={{
-              fontSize: 10,
-              fontFamily: "Helvetica-Bold",
-              color: colors.warmOrange,
-            }}
-          >
+          <Text style={{ fontSize: 9, fontFamily: "Helvetica-Bold", color: colors.warmOrange }}>
             CAFFEINE CUTOFF RULE
           </Text>
-          <Text style={{ fontSize: 8, color: colors.textMid, lineHeight: 1.4 }}>
+          <Text style={{ fontSize: 7, color: colors.textMid, lineHeight: 1.3 }}>
             No caffeine within 6 hours of your target sleep time. If you sleep
             at 0900, last coffee by 0300.
           </Text>
@@ -109,22 +98,10 @@ export default function RecoveryChecklist() {
 
       {/* Wind-down steps */}
       {windDownSteps.map((phase) => (
-        <View key={phase.time} style={{ marginBottom: 8 }}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginBottom: 4,
-            }}
-          >
-            <Text style={{ fontSize: 10, marginRight: 5 }}>{phase.icon}</Text>
-            <Text
-              style={{
-                fontSize: 10,
-                fontFamily: "Helvetica-Bold",
-                color: colors.deepNavy,
-              }}
-            >
+        <View key={phase.time} style={{ marginBottom: 6 }}>
+          <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 3 }}>
+            <Text style={{ fontSize: 9, marginRight: 4 }}>{phase.icon}</Text>
+            <Text style={{ fontSize: 9, fontFamily: "Helvetica-Bold", color: colors.deepNavy }}>
               {phase.time}
             </Text>
           </View>
@@ -134,19 +111,12 @@ export default function RecoveryChecklist() {
               style={{
                 flexDirection: "row",
                 alignItems: "flex-start",
-                marginLeft: 20,
-                marginBottom: 3,
+                marginLeft: 18,
+                marginBottom: 2,
               }}
             >
-              <View style={sharedStyles.checkbox} />
-              <Text
-                style={{
-                  fontSize: 8,
-                  color: colors.textDark,
-                  flex: 1,
-                  lineHeight: 1.4,
-                }}
-              >
+              <View style={{ ...sharedStyles.checkbox, width: 9, height: 9 }} />
+              <Text style={{ fontSize: 7, color: colors.textDark, flex: 1, lineHeight: 1.3 }}>
                 {item}
               </Text>
             </View>
@@ -155,28 +125,22 @@ export default function RecoveryChecklist() {
       ))}
 
       {/* Recovery Day Planner */}
-      <View style={{ marginTop: 4 }}>
+      <View style={{ marginTop: 6 }}>
         <View
           style={{
             backgroundColor: colors.tealPale,
-            paddingTop: 6,
-            paddingBottom: 6,
-            paddingLeft: 12,
-            paddingRight: 12,
+            paddingTop: 5,
+            paddingBottom: 5,
+            paddingLeft: 10,
+            paddingRight: 10,
             borderTopLeftRadius: 4,
             borderTopRightRadius: 4,
           }}
         >
-          <Text
-            style={{
-              fontSize: 10,
-              fontFamily: "Helvetica-Bold",
-              color: colors.teal,
-            }}
-          >
+          <Text style={{ fontSize: 9, fontFamily: "Helvetica-Bold", color: colors.teal }}>
             {"\u{1F4C5}"} Recovery Day Planner
           </Text>
-          <Text style={{ fontSize: 7, color: colors.textMid }}>
+          <Text style={{ fontSize: 6, color: colors.textMid }}>
             Use this on your off days between night shifts
           </Text>
         </View>
@@ -185,10 +149,10 @@ export default function RecoveryChecklist() {
             borderWidth: 0.5,
             borderColor: colors.tealPale,
             borderTopWidth: 0,
-            paddingTop: 6,
-            paddingBottom: 6,
-            paddingLeft: 12,
-            paddingRight: 12,
+            paddingTop: 5,
+            paddingBottom: 5,
+            paddingLeft: 10,
+            paddingRight: 10,
             borderBottomLeftRadius: 4,
             borderBottomRightRadius: 4,
           }}
@@ -199,18 +163,11 @@ export default function RecoveryChecklist() {
               style={{
                 flexDirection: "row",
                 alignItems: "flex-start",
-                marginBottom: 4,
+                marginBottom: 3,
               }}
             >
-              <View style={sharedStyles.checkbox} />
-              <Text
-                style={{
-                  fontSize: 8,
-                  color: colors.textDark,
-                  flex: 1,
-                  lineHeight: 1.4,
-                }}
-              >
+              <View style={{ ...sharedStyles.checkbox, width: 9, height: 9 }} />
+              <Text style={{ fontSize: 7, color: colors.textDark, flex: 1, lineHeight: 1.3 }}>
                 {item}
               </Text>
             </View>

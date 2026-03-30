@@ -2,71 +2,23 @@ import { Page, View, Text } from "@react-pdf/renderer";
 import { colors, sharedStyles } from "./styles";
 
 const pages = [
-  {
-    num: 1,
-    name: "Cover Page",
-    icon: "\u{1F319}",
-    howToUse:
-      "Your bundle cover. Keeps everything together when printed. Consider laminating or using a binder cover.",
-  },
-  {
-    num: 2,
-    name: "Rotating Shift Scheduler",
-    icon: "\u{1F4C5}",
-    howToUse:
-      "Fill in at the start of each month. Use D/N/OFF codes. Track your 2-4 week rotation. Pin to your fridge or keep in your work bag.",
-  },
-  {
-    num: 3,
-    name: "SBAR Patient Handoff Sheet",
-    icon: "\u{1F4CB}",
-    howToUse:
-      "One per patient per shift. Fill in during your shift, use during bedside report. Print extras \u2014 you'll need multiple per shift.",
-  },
-  {
-    num: 4,
-    name: "Hourly Medication & Task Timeline",
-    icon: "\u{1F48A}",
-    howToUse:
-      "Start each shift by filling in patient info. Check off meds, vitals, and tasks. Use the Details column for specifics.",
-  },
-  {
-    num: 5,
-    name: "Daily Fatigue & Self-Care Tracker",
-    icon: "\u{1F9EC}",
-    howToUse:
-      "Rate fatigue after each shift (1-10). Track sleep, caffeine, and mood weekly. Use the self-care checklist daily.",
-  },
-  {
-    num: 6,
-    name: "Post-Shift Sleep Recovery Checklist",
-    icon: "\u{1F634}",
-    howToUse:
-      "Follow the wind-down steps after each night shift. Use the Recovery Day Planner on your off days.",
-  },
-  {
-    num: 7,
-    name: "Night Shift Tips & Self-Care Prompts",
-    icon: "\u{1F4A1}",
-    howToUse:
-      "Reference page. Keep visible (fridge, locker, or desk). Use snack ideas for meal prep. Monitor burnout signs monthly.",
-  },
-  {
-    num: 8,
-    name: "How to Use (This Page)",
-    icon: "\u{1F4D6}",
-    howToUse:
-      "You're reading it! Remove this page once you're familiar with the bundle. Or keep it as a reference.",
-  },
+  { num: 1, name: "Cover Page", icon: "\u{1F319}", howToUse: "Your bundle cover. Keeps everything together when printed. Laminate or use a binder cover." },
+  { num: 2, name: "Rotating Shift Scheduler", icon: "\u{1F4C5}", howToUse: "Fill in at start of each month. Use D/N/OFF codes. Track your 2-4 week rotation." },
+  { num: 3, name: "SBAR Patient Handoff Sheet", icon: "\u{1F4CB}", howToUse: "One per patient per shift. Fill in during shift, use during bedside report. Print extras." },
+  { num: 4, name: "Hourly Medication & Task Timeline", icon: "\u{1F48A}", howToUse: "Start each shift by filling in patient info. Check off meds, vitals, and tasks." },
+  { num: 5, name: "Daily Fatigue & Self-Care Tracker", icon: "\u{1F9EC}", howToUse: "Rate fatigue after each shift (1-10). Track sleep, caffeine, and mood weekly." },
+  { num: 6, name: "Post-Shift Sleep Recovery", icon: "\u{1F634}", howToUse: "Follow wind-down steps after each night shift. Use Recovery Day Planner on off days." },
+  { num: 7, name: "Night Shift Tips & Self-Care", icon: "\u{1F4A1}", howToUse: "Reference page. Keep visible. Use snack ideas for meal prep. Monitor burnout signs." },
+  { num: 8, name: "How to Use (This Page)", icon: "\u{1F4D6}", howToUse: "You're reading it! Remove once familiar, or keep as a reference." },
 ];
 
 const tips = [
   "Print on cardstock for durability (especially the handoff sheets).",
-  "Use a clipboard with storage to carry your active sheets during shift.",
+  "Use a clipboard with storage to carry active sheets during shift.",
   "Laminate the scheduler and tips page for reuse with dry-erase markers.",
   "Store completed trackers in a binder to spot long-term patterns.",
   "Share with your unit \u2014 night shift teams benefit from consistent tools.",
-  "Use on a tablet with a stylus for a paperless option (iPad + GoodNotes works well).",
+  "Use on a tablet with a stylus for a paperless option (iPad + GoodNotes).",
 ];
 
 export default function HowToUsePage() {
@@ -89,57 +41,39 @@ export default function HowToUsePage() {
           key={page.num}
           style={{
             flexDirection: "row",
-            marginBottom: 5,
-            gap: 8,
-            paddingTop: 5,
-            paddingBottom: 5,
-            paddingLeft: 8,
-            paddingRight: 8,
-            borderRadius: 4,
+            marginBottom: 4,
+            gap: 6,
+            paddingTop: 4,
+            paddingBottom: 4,
+            paddingLeft: 6,
+            paddingRight: 6,
+            borderRadius: 3,
             backgroundColor: page.num % 2 === 0 ? colors.offWhite : colors.white,
           }}
         >
           <View
             style={{
-              width: 24,
-              height: 24,
-              borderRadius: 12,
+              width: 22,
+              height: 22,
+              borderRadius: 11,
               backgroundColor: colors.tealPale,
               justifyContent: "center",
               alignItems: "center",
               flexShrink: 0,
             }}
           >
-            <Text
-              style={{
-                fontSize: 10,
-                fontFamily: "Helvetica-Bold",
-                color: colors.teal,
-              }}
-            >
+            <Text style={{ fontSize: 10, fontFamily: "Helvetica-Bold", color: colors.teal }}>
               {page.num}
             </Text>
           </View>
           <View style={{ flex: 1 }}>
             <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 1 }}>
-              <Text style={{ fontSize: 8, marginRight: 4 }}>{page.icon}</Text>
-              <Text
-                style={{
-                  fontSize: 9,
-                  fontFamily: "Helvetica-Bold",
-                  color: colors.deepNavy,
-                }}
-              >
+              <Text style={{ fontSize: 7, marginRight: 3 }}>{page.icon}</Text>
+              <Text style={{ fontSize: 8, fontFamily: "Helvetica-Bold", color: colors.deepNavy }}>
                 {page.name}
               </Text>
             </View>
-            <Text
-              style={{
-                fontSize: 7,
-                color: colors.textMid,
-                lineHeight: 1.4,
-              }}
-            >
+            <Text style={{ fontSize: 6, color: colors.textMid, lineHeight: 1.3 }}>
               {page.howToUse}
             </Text>
           </View>
@@ -154,43 +88,21 @@ export default function HowToUsePage() {
         <View
           style={{
             backgroundColor: colors.ice,
-            paddingTop: 6,
-            paddingBottom: 6,
-            paddingLeft: 10,
-            paddingRight: 10,
-            borderRadius: 4,
+            paddingTop: 5,
+            paddingBottom: 5,
+            paddingLeft: 8,
+            paddingRight: 8,
+            borderRadius: 3,
             borderWidth: 0.5,
             borderColor: colors.tealPale,
           }}
         >
           {tips.map((tip, i) => (
-            <View
-              key={tip}
-              style={{
-                flexDirection: "row",
-                alignItems: "flex-start",
-                marginBottom: 3,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 7,
-                  fontFamily: "Helvetica-Bold",
-                  color: colors.ocean,
-                  marginRight: 5,
-                  width: 10,
-                }}
-              >
+            <View key={tip} style={{ flexDirection: "row", alignItems: "flex-start", marginBottom: 2 }}>
+              <Text style={{ fontSize: 6, fontFamily: "Helvetica-Bold", color: colors.ocean, marginRight: 4, width: 9 }}>
                 {i + 1}.
               </Text>
-              <Text
-                style={{
-                  fontSize: 7,
-                  color: colors.textDark,
-                  flex: 1,
-                  lineHeight: 1.4,
-                }}
-              >
+              <Text style={{ fontSize: 6, color: colors.textDark, flex: 1, lineHeight: 1.3 }}>
                 {tip}
               </Text>
             </View>
@@ -201,36 +113,22 @@ export default function HowToUsePage() {
       {/* Thank you note */}
       <View
         style={{
-          marginTop: 8,
-          paddingTop: 8,
-          paddingBottom: 8,
-          paddingLeft: 12,
-          paddingRight: 12,
+          marginTop: 6,
+          paddingTop: 6,
+          paddingBottom: 6,
+          paddingLeft: 10,
+          paddingRight: 10,
           backgroundColor: colors.tealPale,
-          borderRadius: 4,
+          borderRadius: 3,
           alignItems: "center",
           borderWidth: 0.5,
           borderColor: colors.tealMuted,
         }}
       >
-        <Text
-          style={{
-            fontSize: 10,
-            fontFamily: "Helvetica-Bold",
-            color: colors.teal,
-            marginBottom: 3,
-          }}
-        >
+        <Text style={{ fontSize: 9, fontFamily: "Helvetica-Bold", color: colors.teal, marginBottom: 2 }}>
           Thank You for Choosing This Bundle
         </Text>
-        <Text
-          style={{
-            fontSize: 7,
-            color: colors.textMid,
-            textAlign: "center",
-            lineHeight: 1.5,
-          }}
-        >
+        <Text style={{ fontSize: 6, color: colors.textMid, textAlign: "center", lineHeight: 1.4 }}>
           Built with real shift life in mind. Stay safe, stay organized, and
           take care of yourself as well as you take care of your patients.
         </Text>
