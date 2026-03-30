@@ -58,18 +58,46 @@ function GeneratingState() {
   );
 }
 
+function ErrorState({ message, onRetry }: { message: string; onRetry: () => void }) {
+  return (
+    <div className="text-center">
+      <p className="text-sm text-red-600 mb-3">
+        Failed to generate PDF: {message}
+      </p>
+      <button
+        onClick={onRetry}
+        className="inline-flex items-center gap-2 px-6 py-3 bg-[#1A7A6D] hover:bg-[#15685D] text-white rounded-lg text-sm font-semibold transition-colors cursor-pointer"
+      >
+        Try Again
+      </button>
+    </div>
+  );
+}
+
 export default function PDFDownloader() {
   const [blobUrl, setBlobUrl] = useState<string | null>(null);
   const [generating, setGenerating] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleGenerate = async () => {
     setGenerating(true);
+    setError(null);
     try {
       const blob = await pdf(<NightShiftBundlePDF />).toBlob();
       const url = URL.createObjectURL(blob);
       setBlobUrl(url);
+
+      // Auto-trigger download
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "2026-Night-Shift-Nurse-Survival-Bundle.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch (err) {
+      const msg = err instanceof Error ? err.message : "Unknown error";
       console.error("PDF generation failed:", err);
+      setError(msg);
     } finally {
       setGenerating(false);
     }
@@ -80,6 +108,10 @@ export default function PDFDownloader() {
       if (blobUrl) URL.revokeObjectURL(blobUrl);
     };
   }, [blobUrl]);
+
+  if (error) {
+    return <ErrorState message={error} onRetry={handleGenerate} />;
+  }
 
   if (blobUrl) {
     return <DownloadButtonInner blobUrl={blobUrl} />;
