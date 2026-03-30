@@ -2,23 +2,25 @@ import { Page, View, Text } from "@react-pdf/renderer";
 import { colors, sharedStyles } from "./styles";
 
 const snacks = [
-  { t: "Pre-Shift (1800–1900)", d: "Balanced meal: protein + complex carbs + veggies" },
-  { t: "First Break (~2100)", d: "Greek yogurt + berries, hummus + veggies" },
-  { t: "Mid-Shift (~0000)", d: "Trail mix, cheese + crackers, apple + PB" },
-  { t: "Late Shift (~0300)", d: "Hard-boiled egg, banana, small handful of nuts" },
-  { t: "Post-Shift (~0730)", d: "Light breakfast: oatmeal, toast + avocado" },
+  { t: "Pre-Shift (1800)", d: "Full meal: grilled chicken, brown rice, roasted veggies" },
+  { t: "Break 1 (~2100)", d: "Greek yogurt + berries, or hummus + veggies + pita" },
+  { t: "Mid-Shift (~0000)", d: "Trail mix, cheese + whole grain crackers, apple + PB" },
+  { t: "Break 2 (~0300)", d: "Hard-boiled egg, banana, small handful of almonds" },
+  { t: "Post-Shift (~0730)", d: "Light: oatmeal, toast + avocado, or smoothie (no heavy meals)" },
 ];
 
-const breaks = [
-  { w: "Every 2 hours", d: "Walk to break room. Stretch neck, shoulders, wrists." },
-  { w: "Before med pass", d: "3 deep breaths. Roll shoulders back. Unclench jaw." },
-  { w: "After a code", d: "5-min decompression. Step outside. Name 3 things you see." },
-  { w: "Charting", d: "Stand up every 20 min. Look away from screen (20-20-20)." },
+const brainRef = [
+  { sys: "Neuro", cues: "A&O x__ | Pupils: ___ | Motor: ___ | Pain: ___/10 | GCS: ___" },
+  { sys: "Cardio", cues: "Rhythm: ___ | Rate: ___ | Edema: Y/N | JVD: Y/N | Pulses: ___" },
+  { sys: "Resp", cues: "Lungs: ___ | SpO2: ___% | O2: ___ | Cough: ___ | Secretions: ___" },
+  { sys: "GI/GU", cues: "Diet: ___ | Last BM: ___ | UO: ___mL/hr | N/V: Y/N | Abd: ___" },
+  { sys: "Skin", cues: "Integrity: ___ | Wounds: ___ | Braden: ___ | Dressing: ___" },
+  { sys: "IV/Meds", cues: "Access: ___ | Rate: ___ | Due: ___ | PRN avail: ___" },
 ];
 
-const burnout = ["Dreading shifts more than usual", "Snapping at colleagues or patients", "Cynicism about the profession", "Physical symptoms: headaches, GI issues", "Feeling numb during patient care", "Using food/alcohol to cope"];
+const burnout = ["Dreading shifts more than usual", "Snapping at colleagues/patients", "Cynicism about nursing", "Headaches, GI issues, insomnia", "Feeling numb during care", "Using food/alcohol to cope"];
 
-const coping = ["Talk to a trusted colleague or mentor", "Use your EAP (Employee Assistance Program)", "Say no to extra shifts when depleted", "Journal 5 min post-shift to process", "Remember your \u2018why' \u2014 reconnect with purpose", "Seek support if symptoms persist >2 weeks"];
+const coping = ["Talk to a trusted colleague or mentor", "Use your EAP \u2014 it's free and confidential", "Say no to extra shifts when depleted", "Journal 5 min post-shift (brain dump)", "Reconnect with your 'why' monthly", "Seek support if symptoms persist >2 weeks"];
 
 export default function TipsPage() {
   return (
@@ -26,46 +28,69 @@ export default function TipsPage() {
       <View style={{ flex: 1 }}>
         <View style={sharedStyles.pageHeader}>
           <Text style={sharedStyles.headerBadge}>Quick Reference</Text>
-          <Text style={[sharedStyles.pageTitle, { marginTop: 6 }]}>Night Shift Tips & Self-Care</Text>
-          <Text style={sharedStyles.pageSubtitle}>Snack ideas, micro-break reminders, and burnout prevention.</Text>
+          <Text style={[sharedStyles.pageTitle, { marginTop: 6 }]}>Night Shift Tips & Nurse Brain</Text>
+          <Text style={sharedStyles.pageSubtitle}>Snack ideas, burnout prevention, and quick-reference assessment cues.</Text>
         </View>
 
-        <Text style={sharedStyles.sectionTitle}>Night Shift Snack Ideas</Text>
+        {/* Snack Ideas */}
+        <Text style={sharedStyles.sectionTitle}>Night Shift Nutrition</Text>
         {snacks.map((s, i) => (
-          <View key={s.t} style={{ flexDirection: "row", marginBottom: 1, paddingTop: 2, paddingBottom: 2, paddingLeft: 5, paddingRight: 5, backgroundColor: i % 2 === 0 ? colors.offWhite : colors.white, borderRadius: 2 }}>
-            <Text style={{ width: 95, fontSize: 5, fontFamily: "Helvetica-Bold", color: colors.teal }}>{s.t}</Text>
+          <View key={s.t} style={{ flexDirection: "row", marginBottom: 1, paddingTop: 1.5, paddingBottom: 1.5, paddingLeft: 4, paddingRight: 4, backgroundColor: i % 2 === 0 ? colors.offWhite : colors.white, borderRadius: 1 }}>
+            <Text style={{ width: 80, fontSize: 5, fontFamily: "Helvetica-Bold", color: colors.teal }}>{s.t}</Text>
             <Text style={{ fontSize: 5, color: colors.textDark, flex: 1 }}>{s.d}</Text>
           </View>
         ))}
+        <Text style={{ fontSize: 4, color: colors.textLight, fontFamily: "Helvetica-Oblique", marginTop: 1, marginBottom: 4 }}>
+          Rule of thumb: protein + complex carbs every 3–4 hrs. Avoid sugar spikes after 0300.
+        </Text>
 
-        <Text style={sharedStyles.sectionTitle}>Micro-Break Reminders</Text>
-        {breaks.map((b) => (
-          <View key={b.w} style={{ flexDirection: "row", marginBottom: 3, gap: 5 }}>
-            <View style={{ width: 72, backgroundColor: colors.ocean, paddingTop: 2, paddingBottom: 2, paddingLeft: 4, paddingRight: 4, borderRadius: 2 }}>
-              <Text style={{ fontSize: 5, fontFamily: "Helvetica-Bold", color: colors.white, textAlign: "center" }}>{b.w}</Text>
+        {/* Nurse Brain Quick Reference */}
+        <Text style={sharedStyles.sectionTitle}>System Assessment Cues (Nurse Brain)</Text>
+        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 3, marginBottom: 4 }}>
+          {brainRef.map((b) => (
+            <View key={b.sys} style={{ width: "32%", backgroundColor: colors.ice, borderRadius: 2, paddingTop: 2, paddingBottom: 2, paddingLeft: 4, paddingRight: 4, borderWidth: 0.5, borderColor: colors.tealPale }}>
+              <Text style={{ fontSize: 5, fontFamily: "Helvetica-Bold", color: colors.ocean }}>{b.sys}</Text>
+              <Text style={{ fontSize: 4, color: colors.textMid, lineHeight: 1.2 }}>{b.cues}</Text>
             </View>
-            <Text style={{ fontSize: 6, color: colors.textDark, flex: 1, lineHeight: 1.2 }}>{b.d}</Text>
-          </View>
-        ))}
+          ))}
+        </View>
 
+        {/* Vitals Normal Ranges */}
+        <View style={{ backgroundColor: colors.ice, borderRadius: 2, paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, marginBottom: 4, borderWidth: 0.5, borderColor: colors.tealPale }}>
+          <Text style={{ fontSize: 5, fontFamily: "Helvetica-Bold", color: colors.teal, marginBottom: 1 }}>Adult Vitals Normal Ranges</Text>
+          <View style={{ flexDirection: "row", gap: 8 }}>
+            {[
+              "HR: 60–100",
+              "BP: 90/60–140/90",
+              "RR: 12–20",
+              "SpO2: >95%",
+              "Temp: 36.1–37.2C",
+            ].map((v) => (
+              <Text key={v} style={{ fontSize: 4, color: colors.textMid, fontFamily: "Helvetica-Bold" }}>{v}</Text>
+            ))}
+          </View>
+        </View>
+
+        {/* Burnout Warning Signs */}
         <Text style={sharedStyles.sectionTitle}>Burnout Warning Signs</Text>
-        <View style={{ backgroundColor: colors.warmOrangePale, paddingTop: 4, paddingBottom: 4, paddingLeft: 6, paddingRight: 6, borderRadius: 2 }}>
+        <View style={{ backgroundColor: colors.warmOrangePale, paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, borderRadius: 2, marginBottom: 4 }}>
           <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 2 }}>
             {burnout.map((s) => (
               <View key={s} style={{ flexDirection: "row", width: "48%", marginBottom: 1 }}>
-                <Text style={{ fontSize: 5, color: colors.coral, marginRight: 2 }}>{"\u25CF"}</Text>
-                <Text style={{ fontSize: 5, color: colors.textDark, flex: 1, lineHeight: 1.2 }}>{s}</Text>
+                <Text style={{ fontSize: 4, color: colors.coral, marginRight: 1 }}>{"\u25CF"}</Text>
+                <Text style={{ fontSize: 4, color: colors.textDark, flex: 1, lineHeight: 1.2 }}>{s}</Text>
               </View>
             ))}
           </View>
         </View>
 
+        {/* Coping Strategies */}
         <Text style={sharedStyles.sectionTitle}>Coping Strategies</Text>
-        <View style={{ backgroundColor: colors.softGreenPale, paddingTop: 4, paddingBottom: 4, paddingLeft: 6, paddingRight: 6, borderRadius: 2 }}>
+        <View style={{ backgroundColor: colors.softGreenPale, paddingTop: 3, paddingBottom: 3, paddingLeft: 5, paddingRight: 5, borderRadius: 2 }}>
           {coping.map((s) => (
-            <View key={s} style={{ flexDirection: "row", alignItems: "flex-start", marginBottom: 2 }}>
-              <View style={{ ...sharedStyles.checkbox, borderColor: colors.softGreen, width: 7, height: 7 }} />
-              <Text style={{ fontSize: 6, color: colors.textDark, flex: 1, lineHeight: 1.2 }}>{s}</Text>
+            <View key={s} style={{ flexDirection: "row", alignItems: "flex-start", marginBottom: 1.5 }}>
+              <View style={{ ...sharedStyles.checkbox, borderColor: colors.softGreen, width: 6, height: 6 }} />
+              <Text style={{ fontSize: 5, color: colors.textDark, flex: 1, lineHeight: 1.2 }}>{s}</Text>
             </View>
           ))}
         </View>
