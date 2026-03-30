@@ -50,7 +50,10 @@ export default function MedicationTimeline() {
         style={{
           flexDirection: "row",
           backgroundColor: colors.warmOrangePale,
-          padding: "6 12",
+          paddingTop: 6,
+          paddingBottom: 6,
+          paddingLeft: 12,
+          paddingRight: 12,
           borderRadius: 4,
           marginBottom: 8,
           gap: 16,
@@ -90,8 +93,12 @@ export default function MedicationTimeline() {
         style={{
           flexDirection: "row",
           backgroundColor: colors.deepNavy,
-          padding: "5 8",
-          borderRadius: "3 3 0 0",
+          paddingTop: 5,
+          paddingBottom: 5,
+          paddingLeft: 8,
+          paddingRight: 8,
+          borderTopLeftRadius: 3,
+          borderTopRightRadius: 3,
         }}
       >
         <Text
@@ -152,7 +159,10 @@ export default function MedicationTimeline() {
             key={slot.time}
             style={{
               flexDirection: "row",
-              padding: "3 8",
+              paddingTop: 3,
+              paddingBottom: 3,
+              paddingLeft: 8,
+              paddingRight: 8,
               backgroundColor: isHighlight
                 ? colors.ice
                 : isMeds

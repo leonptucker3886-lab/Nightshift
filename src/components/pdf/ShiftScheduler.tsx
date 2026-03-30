@@ -101,7 +101,10 @@ export default function ShiftScheduler() {
           flexDirection: "row",
           gap: 14,
           marginBottom: 10,
-          padding: "6 10",
+          paddingTop: 6,
+            paddingBottom: 6,
+            paddingLeft: 10,
+            paddingRight: 10,
           backgroundColor: colors.offWhite,
           borderRadius: 3,
         }}

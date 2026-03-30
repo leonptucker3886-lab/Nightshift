@@ -73,7 +73,10 @@ export default function RecoveryChecklist() {
           backgroundColor: "#FFF8E1",
           borderLeftWidth: 3,
           borderLeftColor: colors.warmOrange,
-          padding: "8 12",
+          paddingTop: 8,
+          paddingBottom: 8,
+          paddingLeft: 12,
+          paddingRight: 12,
           borderRadius: 3,
           marginBottom: 12,
           flexDirection: "row",
@@ -169,8 +172,12 @@ export default function RecoveryChecklist() {
         <View
           style={{
             backgroundColor: colors.tealPale,
-            padding: "6 12",
-            borderRadius: "3 3 0 0",
+            paddingTop: 6,
+            paddingBottom: 6,
+            paddingLeft: 12,
+            paddingRight: 12,
+            borderTopLeftRadius: 3,
+            borderTopRightRadius: 3,
           }}
         >
           <Text
@@ -191,8 +198,12 @@ export default function RecoveryChecklist() {
             borderWidth: 0.5,
             borderColor: colors.tealPale,
             borderTopWidth: 0,
-            padding: "6 12",
-            borderRadius: "0 0 3 3",
+            paddingTop: 6,
+            paddingBottom: 6,
+            paddingLeft: 12,
+            paddingRight: 12,
+            borderBottomLeftRadius: 3,
+            borderBottomRightRadius: 3,
           }}
         >
           {recoveryDayItems.map((item) => (

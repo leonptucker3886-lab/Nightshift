@@ -68,7 +68,10 @@ export default function HandoffSheet() {
         style={{
           flexDirection: "row",
           backgroundColor: colors.ice,
-          padding: "8 12",
+          paddingTop: 8,
+          paddingBottom: 8,
+          paddingLeft: 12,
+          paddingRight: 12,
           borderRadius: 4,
           marginBottom: 12,
           gap: 16,

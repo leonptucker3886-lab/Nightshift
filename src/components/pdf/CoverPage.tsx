@@ -48,7 +48,10 @@ export default function CoverPage() {
             style={{
               backgroundColor: colors.teal,
               alignSelf: "flex-start",
-              padding: "5 14",
+              paddingTop: 5,
+              paddingBottom: 5,
+              paddingLeft: 14,
+              paddingRight: 14,
               borderRadius: 3,
               marginBottom: 30,
             }}

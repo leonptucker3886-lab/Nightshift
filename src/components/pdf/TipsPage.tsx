@@ -59,7 +59,10 @@ export default function TipsPage() {
             style={{
               flexDirection: "row",
               marginBottom: 4,
-              padding: "4 8",
+              paddingTop: 4,
+              paddingBottom: 4,
+              paddingLeft: 8,
+              paddingRight: 8,
               backgroundColor:
                 snackIdeas.indexOf(snack) % 2 === 0
                   ? colors.offWhite
@@ -102,7 +105,10 @@ export default function TipsPage() {
               style={{
                 width: 90,
                 backgroundColor: colors.ocean,
-                padding: "4 6",
+                paddingTop: 4,
+                paddingBottom: 4,
+                paddingLeft: 6,
+                paddingRight: 6,
                 borderRadius: 3,
               }}
             >
@@ -134,7 +140,10 @@ export default function TipsPage() {
         <View
           style={{
             backgroundColor: "#FFF3E0",
-            padding: "8 10",
+            paddingTop: 8,
+            paddingBottom: 8,
+            paddingLeft: 10,
+            paddingRight: 10,
             borderRadius: 4,
             marginBottom: 8,
           }}
@@ -176,7 +185,10 @@ export default function TipsPage() {
         <View
           style={{
             backgroundColor: colors.softGreenPale,
-            padding: "8 10",
+            paddingTop: 8,
+            paddingBottom: 8,
+            paddingLeft: 10,
+            paddingRight: 10,
             borderRadius: 4,
           }}
         >

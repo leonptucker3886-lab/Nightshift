@@ -130,7 +130,10 @@ export default function HowToUsePage() {
         <View
           style={{
             backgroundColor: colors.ice,
-            padding: "8 10",
+            paddingTop: 8,
+            paddingBottom: 8,
+            paddingLeft: 10,
+            paddingRight: 10,
             borderRadius: 4,
           }}
         >
@@ -173,7 +176,10 @@ export default function HowToUsePage() {
       <View
         style={{
           marginTop: 12,
-          padding: "10 14",
+          paddingTop: 10,
+          paddingBottom: 10,
+          paddingLeft: 14,
+          paddingRight: 14,
           backgroundColor: colors.tealPale,
           borderRadius: 4,
           alignItems: "center",

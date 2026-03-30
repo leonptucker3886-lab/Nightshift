@@ -36,8 +36,12 @@ export default function SelfCareTracker() {
           style={{
             flexDirection: "row",
             backgroundColor: colors.deepNavy,
-            padding: "5 8",
-            borderRadius: "3 3 0 0",
+            paddingTop: 5,
+            paddingBottom: 5,
+            paddingLeft: 8,
+            paddingRight: 8,
+            borderTopLeftRadius: 3,
+            borderTopRightRadius: 3,
           }}
         >
           <View style={{ width: 50 }}>
@@ -70,7 +74,10 @@ export default function SelfCareTracker() {
         <View
           style={{
             flexDirection: "row",
-            padding: "6 8",
+            paddingTop: 6,
+            paddingBottom: 6,
+            paddingLeft: 8,
+            paddingRight: 8,
             backgroundColor: colors.offWhite,
             borderBottomWidth: 0.5,
             borderBottomColor: colors.lightGray,
@@ -120,7 +127,10 @@ export default function SelfCareTracker() {
         <View
           style={{
             flexDirection: "row",
-            padding: "6 8",
+            paddingTop: 6,
+            paddingBottom: 6,
+            paddingLeft: 8,
+            paddingRight: 8,
             borderBottomWidth: 0.5,
             borderBottomColor: colors.lightGray,
             alignItems: "center",
@@ -160,7 +170,10 @@ export default function SelfCareTracker() {
         <View
           style={{
             flexDirection: "row",
-            padding: "6 8",
+            paddingTop: 6,
+            paddingBottom: 6,
+            paddingLeft: 8,
+            paddingRight: 8,
             backgroundColor: colors.offWhite,
             borderBottomWidth: 0.5,
             borderBottomColor: colors.lightGray,
@@ -201,7 +214,10 @@ export default function SelfCareTracker() {
         <View
           style={{
             flexDirection: "row",
-            padding: "6 8",
+            paddingTop: 6,
+            paddingBottom: 6,
+            paddingLeft: 8,
+            paddingRight: 8,
             borderBottomWidth: 0.5,
             borderBottomColor: colors.lightGray,
             alignItems: "center",
@@ -257,7 +273,10 @@ export default function SelfCareTracker() {
                   flexDirection: "row",
                   alignItems: "flex-start",
                   marginBottom: 8,
-                  padding: "6 8",
+                  paddingTop: 6,
+            paddingBottom: 6,
+            paddingLeft: 8,
+            paddingRight: 8,
                   backgroundColor: colors.softGreenPale,
                   borderRadius: 3,
                 }}
@@ -285,7 +304,10 @@ export default function SelfCareTracker() {
                   flexDirection: "row",
                   alignItems: "flex-start",
                   marginBottom: 8,
-                  padding: "6 8",
+                  paddingTop: 6,
+            paddingBottom: 6,
+            paddingLeft: 8,
+            paddingRight: 8,
                   backgroundColor: colors.softGreenPale,
                   borderRadius: 3,
                 }}
@@ -335,7 +357,10 @@ export default function SelfCareTracker() {
               key={action.label}
               style={{
                 flex: 1,
-                padding: "8 10",
+                paddingTop: 8,
+                paddingBottom: 8,
+                paddingLeft: 10,
+                paddingRight: 10,
                 backgroundColor: colors.lavenderPale,
                 borderRadius: 4,
                 alignItems: "center",
