@@ -16,9 +16,9 @@ export default function SelfCareTracker() {
   return (
     <Page size="LETTER" style={sharedStyles.page}>
       {/* Header */}
-      <View style={{ marginBottom: 10 }}>
+      <View style={{ marginBottom: 6 }}>
         <Text style={sharedStyles.headerBadge}>Wellness Tracking</Text>
-        <Text style={[sharedStyles.pageTitle, { marginTop: 8 }]}>
+        <Text style={[sharedStyles.pageTitle, { marginTop: 4 }]}>
           Daily Fatigue & Self-Care Tracker
         </Text>
         <Text style={sharedStyles.pageSubtitle}>
@@ -28,7 +28,7 @@ export default function SelfCareTracker() {
       </View>
 
       {/* Week tracker */}
-      <View style={{ marginBottom: 14 }}>
+      <View style={{ marginBottom: 8 }}>
         <Text style={sharedStyles.sectionTitle}>Weekly Alertness Log</Text>
 
         {/* Header row */}
@@ -255,11 +255,11 @@ export default function SelfCareTracker() {
       </View>
 
       {/* Self-care prompts checklist */}
-      <View style={{ marginBottom: 14 }}>
+      <View style={{ marginBottom: 8 }}>
         <Text style={sharedStyles.sectionTitle}>
           Daily Self-Care Checklist
         </Text>
-        <Text style={{ fontSize: 7, color: colors.textLight, marginBottom: 8 }}>
+        <Text style={{ fontSize: 6, color: colors.textLight, marginBottom: 4 }}>
           Check off each item daily. Consistency beats perfection.
         </Text>
 
@@ -272,11 +272,11 @@ export default function SelfCareTracker() {
                 style={{
                   flexDirection: "row",
                   alignItems: "flex-start",
-                  marginBottom: 8,
-                  paddingTop: 6,
-            paddingBottom: 6,
-            paddingLeft: 8,
-            paddingRight: 8,
+              marginBottom: 4,
+              paddingTop: 4,
+              paddingBottom: 4,
+              paddingLeft: 6,
+              paddingRight: 6,
                   backgroundColor: colors.softGreenPale,
                   borderRadius: 3,
                 }}
@@ -303,11 +303,11 @@ export default function SelfCareTracker() {
                 style={{
                   flexDirection: "row",
                   alignItems: "flex-start",
-                  marginBottom: 8,
-                  paddingTop: 6,
-            paddingBottom: 6,
-            paddingLeft: 8,
-            paddingRight: 8,
+              marginBottom: 4,
+              paddingTop: 4,
+              paddingBottom: 4,
+              paddingLeft: 6,
+              paddingRight: 6,
                   backgroundColor: colors.softGreenPale,
                   borderRadius: 3,
                 }}
@@ -388,7 +388,7 @@ export default function SelfCareTracker() {
       </View>
 
       {/* Notes section */}
-      <View style={{ marginTop: 10 }}>
+      <View style={{ marginTop: 6 }}>
         <Text style={sharedStyles.sectionTitle}>Weekly Reflection Notes</Text>
         {Array.from({ length: 3 }, (_, i) => (
           <View

@@ -57,9 +57,9 @@ export default function RecoveryChecklist() {
   return (
     <Page size="LETTER" style={sharedStyles.page}>
       {/* Header */}
-      <View style={{ marginBottom: 10 }}>
+      <View style={{ marginBottom: 6 }}>
         <Text style={sharedStyles.headerBadge}>Recovery & Rest</Text>
-        <Text style={[sharedStyles.pageTitle, { marginTop: 8 }]}>
+        <Text style={[sharedStyles.pageTitle, { marginTop: 4 }]}>
           Post-Shift Sleep Recovery Checklist
         </Text>
         <Text style={sharedStyles.pageSubtitle}>
@@ -73,12 +73,12 @@ export default function RecoveryChecklist() {
           backgroundColor: "#FFF8E1",
           borderLeftWidth: 3,
           borderLeftColor: colors.warmOrange,
-          paddingTop: 8,
-          paddingBottom: 8,
-          paddingLeft: 12,
-          paddingRight: 12,
+          paddingTop: 6,
+          paddingBottom: 6,
+          paddingLeft: 10,
+          paddingRight: 10,
           borderRadius: 3,
-          marginBottom: 12,
+          marginBottom: 8,
           flexDirection: "row",
           alignItems: "center",
         }}
@@ -103,7 +103,7 @@ export default function RecoveryChecklist() {
 
       {/* Wind-down steps */}
       {windDownSteps.map((phase) => (
-        <View key={phase.time} style={{ marginBottom: 10 }}>
+        <View key={phase.time} style={{ marginBottom: 6 }}>
           <View
             style={{
               flexDirection: "row",
@@ -168,7 +168,7 @@ export default function RecoveryChecklist() {
       ))}
 
       {/* Recovery Day Planner */}
-      <View style={{ marginTop: 6 }}>
+      <View style={{ marginTop: 4 }}>
         <View
           style={{
             backgroundColor: colors.tealPale,
@@ -243,7 +243,7 @@ export default function RecoveryChecklist() {
       </View>
 
       {/* Sleep environment checklist */}
-      <View style={{ marginTop: 10 }}>
+      <View style={{ marginTop: 6 }}>
         <Text style={sharedStyles.sectionTitle}>
           Sleep Environment Audit
         </Text>

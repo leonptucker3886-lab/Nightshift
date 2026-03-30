@@ -65,9 +65,9 @@ export default function HowToUsePage() {
   return (
     <Page size="LETTER" style={sharedStyles.page}>
       {/* Header */}
-      <View style={{ marginBottom: 12 }}>
+      <View style={{ marginBottom: 6 }}>
         <Text style={sharedStyles.headerBadge}>Getting Started</Text>
-        <Text style={[sharedStyles.pageTitle, { marginTop: 8 }]}>
+        <Text style={[sharedStyles.pageTitle, { marginTop: 4 }]}>
           How to Use This Bundle
         </Text>
         <Text style={sharedStyles.pageSubtitle}>
@@ -81,15 +81,15 @@ export default function HowToUsePage() {
           key={page.num}
           style={{
             flexDirection: "row",
-            marginBottom: 7,
-            gap: 8,
+            marginBottom: 4,
+            gap: 6,
           }}
         >
           <View
             style={{
-              width: 28,
-              height: 28,
-              borderRadius: 14,
+              width: 22,
+              height: 22,
+              borderRadius: 11,
               backgroundColor: colors.tealPale,
               justifyContent: "center",
               alignItems: "center",
@@ -98,7 +98,7 @@ export default function HowToUsePage() {
           >
             <Text
               style={{
-                fontSize: 12,
+                fontSize: 10,
                 fontFamily: "Helvetica-Bold",
                 color: colors.teal,
               }}
@@ -125,15 +125,15 @@ export default function HowToUsePage() {
       ))}
 
       {/* Pro Tips */}
-      <View style={{ marginTop: 8 }}>
+      <View style={{ marginTop: 4 }}>
         <Text style={sharedStyles.sectionTitle}>Pro Tips</Text>
         <View
           style={{
             backgroundColor: colors.ice,
-            paddingTop: 8,
-            paddingBottom: 8,
-            paddingLeft: 10,
-            paddingRight: 10,
+            paddingTop: 6,
+            paddingBottom: 6,
+            paddingLeft: 8,
+            paddingRight: 8,
             borderRadius: 4,
           }}
         >
@@ -143,7 +143,7 @@ export default function HowToUsePage() {
               style={{
                 flexDirection: "row",
                 alignItems: "flex-start",
-                marginBottom: 4,
+                marginBottom: 2,
               }}
             >
               <Text
@@ -175,11 +175,11 @@ export default function HowToUsePage() {
       {/* Thank you note */}
       <View
         style={{
-          marginTop: 12,
-          paddingTop: 10,
-          paddingBottom: 10,
-          paddingLeft: 14,
-          paddingRight: 14,
+          marginTop: 6,
+          paddingTop: 6,
+          paddingBottom: 6,
+          paddingLeft: 10,
+          paddingRight: 10,
           backgroundColor: colors.tealPale,
           borderRadius: 4,
           alignItems: "center",

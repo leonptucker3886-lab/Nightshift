@@ -38,9 +38,9 @@ export default function TipsPage() {
   return (
     <Page size="LETTER" style={sharedStyles.page}>
       {/* Header */}
-      <View style={{ marginBottom: 10 }}>
+      <View style={{ marginBottom: 6 }}>
         <Text style={sharedStyles.headerBadge}>Quick Reference</Text>
-        <Text style={[sharedStyles.pageTitle, { marginTop: 8 }]}>
+        <Text style={[sharedStyles.pageTitle, { marginTop: 4 }]}>
           Night Shift Tips & Self-Care Prompts
         </Text>
         <Text style={sharedStyles.pageSubtitle}>
@@ -49,7 +49,7 @@ export default function TipsPage() {
       </View>
 
       {/* Snack Ideas */}
-      <View style={{ marginBottom: 12 }}>
+      <View style={{ marginBottom: 8 }}>
         <Text style={sharedStyles.sectionTitle}>
           Night Shift Snack Ideas
         </Text>
@@ -88,7 +88,7 @@ export default function TipsPage() {
       </View>
 
       {/* Micro-Break Reminders */}
-      <View style={{ marginBottom: 12 }}>
+      <View style={{ marginBottom: 8 }}>
         <Text style={sharedStyles.sectionTitle}>
           Micro-Break Reminders
         </Text>
@@ -133,7 +133,7 @@ export default function TipsPage() {
       </View>
 
       {/* Burnout Prevention */}
-      <View style={{ marginBottom: 12 }}>
+      <View style={{ marginBottom: 8 }}>
         <Text style={sharedStyles.sectionTitle}>
           Burnout Warning Signs
         </Text>
