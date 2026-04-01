@@ -1,34 +1,34 @@
 import { Page, View, Text } from "@react-pdf/renderer";
 import { colors, sharedStyles } from "./styles";
 
-// 30-min increment time slots with suggested task prompts and sample entries
-// Sample patient: James Rodriguez, 58M, Rm 308-A, post-op R hip ORIF
-const timeSlots = [
-  { time: "1900", label: "Shift Start", prompt: "Get report / SBAR", sample: "", note: "", given: false, charted: false, isKey: true },
-  { time: "1930", label: "", prompt: "Rounding \u2014 introduce self to patients", sample: "Rounding done \u2014 all 5 patients stable", note: "Rm 308-A requesting pain med", given: true, charted: true },
-  { time: "2000", label: "Evening Meds", prompt: "Scheduled meds + PRN pain meds", sample: "Norco 10/325 PO \u2014 Rm 308-A (Rodriguez)", note: "Pt rates pain 5/10 R hip", given: true, charted: true, isMeds: true },
-  { time: "2030", label: "", prompt: "Pain reassessment q2h (post-med)", sample: "Rm 308-A: 5/10 \u2192 3/10 after Norco", note: "Pt resting comfortably", given: true, charted: true },
-  { time: "2100", label: "", prompt: "I&O count / Foley check", sample: "Rm 308-A Foley: 200mL since 1900", note: "UOP adequate", given: true, charted: true },
-  { time: "2130", label: "", prompt: "Turning / repositioning (q2h)", sample: "", note: "", given: false, charted: false },
-  { time: "2200", label: "", prompt: "Vital signs (or per order)", sample: "Rm 308-A: T37.2 HR76 BP134/80 RR16 SpO2 96%", note: "Vitals stable, no concerns", given: true, charted: true },
-  { time: "2230", label: "", prompt: "Rounding \u2014 safety check, call lights", sample: "Rounding done \u2014 all call lights within reach", note: "", given: true, charted: false },
-  { time: "2300", label: "Midnight Meds", prompt: "Scheduled meds (hold caffeine)", sample: "Lovenox 40mg SQ \u2014 Rm 308-A. Metoprolol 25mg PO \u2014 Rm 310.", note: "", given: true, charted: true, isMeds: true },
-  { time: "2330", label: "", prompt: "Pain reassessment / comfort check", sample: "", note: "", given: false, charted: false },
-  { time: "0000", label: "Midnight", prompt: "Rounding \u2014 fall risk check", sample: "Rounding done \u2014 Rm 312 call light on floor (fixed)", note: "Rm 308-A sleeping", given: true, charted: true, isKey: true },
-  { time: "0030", label: "", prompt: "I&O count / intake check", sample: "", note: "", given: false, charted: false },
-  { time: "0100", label: "", prompt: "Turning / repositioning", sample: "Rm 308-A turned to L side", note: "Pt awake briefly, repositioned", given: true, charted: true },
-  { time: "0130", label: "", prompt: "Cluster care \u2014 check all patients", sample: "", note: "", given: false, charted: false },
-  { time: "0200", label: "", prompt: "Rounding \u2014 safety, call lights", sample: "", note: "", given: false, charted: false },
-  { time: "0230", label: "", prompt: "Pain reassessment q2h", sample: "Rm 308-A: 4/10 \u2014 requesting PRN", note: "Pt awake, wants water + med", given: true, charted: true },
-  { time: "0300", label: "", prompt: "Vital signs (or per order)", sample: "Rm 308-A: T37.3 HR80 BP138/84 RR17 SpO2 95%", note: "SpO2 dipped to 95%, watched \u2192 back to 96%", given: true, charted: true },
-  { time: "0330", label: "", prompt: "I&O count", sample: "", note: "", given: false, charted: false },
-  { time: "0400", label: "AM Meds / Labs", prompt: "Scheduled meds + AM lab draws", sample: "CBC/CMP drawn Rm 308-A. Metoprolol Rm 310.", note: "Lab results pending", given: true, charted: true, isMeds: true },
-  { time: "0430", label: "", prompt: "Pain reassessment / comfort", sample: "", note: "", given: false, charted: false },
-  { time: "0500", label: "Vitals", prompt: "AM vital signs (all patients)", sample: "Rm 308-A: T37.1 HR78 BP136/82 RR16 SpO2 96%", note: "Vitals stable. Pt sleeping.", given: true, charted: true },
-  { time: "0530", label: "", prompt: "Turning / repositioning", sample: "", note: "", given: false, charted: false },
-  { time: "0600", label: "AM Assess", prompt: "Full assessment + I&O totals", sample: "Rm 308-A: 800mL UOP total. Drain 30mL. Weight 92kg.", note: "I&O documented. Weight stable.", given: true, charted: true },
-  { time: "0630", label: "", prompt: "Chart review / orders check", sample: "", note: "", given: false, charted: false },
-  { time: "0700", label: "Shift End", prompt: "Give report / SBAR", sample: "Report given to day RN (Johnson). SBAR complete.", note: "No outstanding concerns.", given: true, charted: true, isKey: true },
+// 30-min time slots with task prompts and sample documentation
+// Sample: Angela Torres, 45F, Rm 415-B, post-op L TKA, pain + low BP
+const slots = [
+  { time: "1900", label: "Shift Start", prompt: "Receive report / SBAR", sample: "", note: "", g: false, c: false, key: true },
+  { time: "1930", label: "", prompt: "Rounding \u2014 introduce self, assess pain", sample: "All 5 patients rounded. Rm 415-A reports pain 6/10.", note: "Torres requesting pain med", g: true, c: true },
+  { time: "2000", label: "Evening Meds", prompt: "Scheduled meds + PRN pain meds", sample: "Dilaudid 0.5mg IV \u2014 Rm 415-B (Torres)", note: "BP 96/58 \u2014 hold HTN meds", g: true, c: true, med: true },
+  { time: "2030", label: "", prompt: "Pain reassessment (30 min post-med)", sample: "Rm 415-B: 6/10 \u2192 4/10 after Dilaudid", note: "Pt less anxious, resting", g: true, c: true },
+  { time: "2100", label: "", prompt: "I&O count / Foley check", sample: "Rm 415-B Foley: 150mL since 1900 (amber)", note: "UOP adequate for now", g: true, c: true },
+  { time: "2130", label: "", prompt: "Turning / repositioning q2h", sample: "", note: "", g: false, c: false },
+  { time: "2200", label: "", prompt: "Vital signs (all patients)", sample: "Rm 415-B: T37.0 HR90 BP100/62 RR17 SpO2 97%", note: "BP improved slightly from 96/58", g: true, c: true },
+  { time: "2230", label: "", prompt: "Rounding \u2014 safety check, call lights", sample: "Rounding done. Rm 418 call light replaced.", note: "", g: true, c: false },
+  { time: "2300", label: "Midnight Meds", prompt: "Scheduled meds (hold caffeine)", sample: "Enoxaparin 40mg SQ \u2014 Rm 415-B. Metoprolol Rm 420.", note: "", g: true, c: true, med: true },
+  { time: "2330", label: "", prompt: "Pain reassessment / comfort check", sample: "", note: "", g: false, c: false },
+  { time: "0000", label: "Midnight", prompt: "Rounding \u2014 fall risk check", sample: "Rounding done. Rm 415-B sleeping. Bed alarm on.", note: "Torres resting, no distress", g: true, c: true, key: true },
+  { time: "0030", label: "", prompt: "I&O count / intake check", sample: "", note: "", g: false, c: false },
+  { time: "0100", label: "", prompt: "Turning / repositioning q2h", sample: "Rm 415-B turned to R side", note: "Pt briefly awake, repositioned", g: true, c: true },
+  { time: "0130", label: "", prompt: "Cluster care \u2014 check all patients", sample: "", note: "", g: false, c: false },
+  { time: "0200", label: "", prompt: "Rounding \u2014 safety, call lights", sample: "", note: "", g: false, c: false },
+  { time: "0230", label: "", prompt: "Pain reassessment q2h", sample: "Rm 415-B: 5/10 \u2014 requesting PRN", note: "Pt awake, mild nausea noted", g: true, c: true },
+  { time: "0300", label: "", prompt: "Vital signs (or per order)", sample: "Rm 415-B: T37.1 HR88 BP98/60 RR18 SpO2 96%", note: "BP still low. Watching. MD aware.", g: true, c: true },
+  { time: "0330", label: "", prompt: "I&O count", sample: "", note: "", g: false, c: false },
+  { time: "0400", label: "AM Meds / Labs", prompt: "Scheduled meds + AM lab draws", sample: "CBC/CMP drawn Rm 415-B. Ondansetron 4mg IV PRN.", note: "Hgb result pending \u2014 watch post-op", g: true, c: true, med: true },
+  { time: "0430", label: "", prompt: "Pain reassessment / comfort", sample: "", note: "", g: false, c: false },
+  { time: "0500", label: "AM Vitals", prompt: "AM vital signs (all patients)", sample: "Rm 415-B: T36.9 HR86 BP102/64 RR16 SpO2 97%", note: "BP trending up slightly. Good sign.", g: true, c: true },
+  { time: "0530", label: "", prompt: "Turning / repositioning q2h", sample: "", note: "", g: false, c: false },
+  { time: "0600", label: "AM Assess", prompt: "Full assessment + I&O totals", sample: "Rm 415-B: UOP 720mL total. Drain 45mL. Wt 86kg.", note: "I&O documented. Hgb 9.8 (stable).", g: true, c: true },
+  { time: "0630", label: "", prompt: "Chart review / orders check", sample: "", note: "", g: false, c: false },
+  { time: "0700", label: "Shift End", prompt: "Give report / SBAR to day RN", sample: "Report given to day RN (Martinez). SBAR complete.", note: "BP low but stable. Hgb pending.", g: true, c: true, key: true },
 ];
 
 export default function MedicationTimeline() {
@@ -42,7 +42,7 @@ export default function MedicationTimeline() {
             Night Shift Medication & Task Timeline
           </Text>
           <Text style={sharedStyles.pageSubtitle}>
-            1900–0700 in 30-min slots. Track meds, reassessments, rounding, and I&O.
+            1900\u20130700 in 30-min slots. Track meds, reassessments, rounding, I&O, and charting.
           </Text>
         </View>
 
@@ -62,21 +62,23 @@ export default function MedicationTimeline() {
             borderColor: "#F0D9B5",
           }}
         >
-          {["Patient", "Room", "Dx", "RN"].map((l) => (
-            <View key={l} style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-              <Text
-                style={{
-                  fontSize: 6,
-                  fontFamily: "Helvetica-Bold",
-                  color: colors.warmOrange,
-                  marginRight: 2,
-                }}
-              >
-                {l}:
+          {[
+            { label: "Patient", value: "Angela Torres" },
+            { label: "Room", value: "415-B" },
+            { label: "Dx", value: "Post-op L TKA" },
+            { label: "RN", value: "" },
+          ].map((f) => (
+            <View key={f.label} style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
+              <Text style={{ fontSize: 6, fontFamily: "Helvetica-Bold", color: colors.warmOrange, marginRight: 2 }}>
+                {f.label}:
               </Text>
-              <View style={{ flex: 1, borderBottomWidth: 0.5, borderBottomColor: "#E0C9A0" }}>
-                <Text style={{ fontSize: 4, color: "transparent" }}>.</Text>
-              </View>
+              {f.value ? (
+                <Text style={{ fontSize: 5, color: colors.sampleText, fontFamily: "Helvetica-Oblique" }}>{f.value}</Text>
+              ) : (
+                <View style={{ flex: 1, borderBottomWidth: 0.5, borderBottomColor: "#E0C9A0" }}>
+                  <Text style={{ fontSize: 4, color: "transparent" }}>.</Text>
+                </View>
+              )}
             </View>
           ))}
         </View>
@@ -99,7 +101,7 @@ export default function MedicationTimeline() {
         >
           <Text style={{ fontSize: 8, marginRight: 4 }}>{"\u26A1"}</Text>
           <Text style={{ fontSize: 6, color: colors.teal, fontFamily: "Helvetica-Bold" }}>
-            Cluster care during peak fatigue hours (0200–0400). Combine tasks to minimize trips and maximize rest windows.
+            Cluster care during lower-fatigue windows. Combine tasks at 1930, 2200, 0000, and 0500 to minimize trips during the 0200\u20130400 dip.
           </Text>
         </View>
 
@@ -116,16 +118,16 @@ export default function MedicationTimeline() {
             borderTopRightRadius: 3,
           }}
         >
-          <Text style={{ width: 36, fontSize: 6, fontFamily: "Helvetica-Bold", color: colors.white, textTransform: "uppercase", letterSpacing: 0.3 }}>
+          <Text style={{ width: 38, fontSize: 6, fontFamily: "Helvetica-Bold", color: colors.white, textTransform: "uppercase", letterSpacing: 0.3 }}>
             Time
           </Text>
-          <Text style={{ flex: 3, fontSize: 6, fontFamily: "Helvetica-Bold", color: colors.white, textTransform: "uppercase", letterSpacing: 0.3 }}>
+          <Text style={{ flex: 3, fontSize: 6, fontFamily: "Helvetica-Bold", color: colors.white, textTransform: "uppercase", letterSpacing: 0.3, paddingLeft: 2 }}>
             Medication / Dose / Patient
           </Text>
-          <View style={{ width: 28, alignItems: "center" }}>
+          <View style={{ width: 26, alignItems: "center" }}>
             <Text style={{ fontSize: 5, fontFamily: "Helvetica-Bold", color: colors.tealLight, textTransform: "uppercase" }}>Given</Text>
           </View>
-          <View style={{ width: 28, alignItems: "center" }}>
+          <View style={{ width: 26, alignItems: "center" }}>
             <Text style={{ fontSize: 5, fontFamily: "Helvetica-Bold", color: colors.tealLight, textTransform: "uppercase" }}>Chart</Text>
           </View>
           <Text style={{ flex: 2, fontSize: 6, fontFamily: "Helvetica-Bold", color: colors.white, textTransform: "uppercase", letterSpacing: 0.3, marginLeft: 3 }}>
@@ -134,10 +136,10 @@ export default function MedicationTimeline() {
         </View>
 
         {/* Time rows */}
-        {timeSlots.map((s, i) => {
-          const rs = s.isKey
+        {slots.map((s, i) => {
+          const rowStyle = s.key
             ? { backgroundColor: colors.ice, borderLeftWidth: 2, borderLeftColor: colors.ocean }
-            : s.isMeds
+            : s.med
               ? { backgroundColor: colors.warmOrangePale, borderLeftWidth: 2, borderLeftColor: colors.warmOrange }
               : i % 2 === 0
                 ? { backgroundColor: colors.white }
@@ -155,92 +157,78 @@ export default function MedicationTimeline() {
                 borderBottomWidth: 0.5,
                 borderBottomColor: colors.lightGray,
                 alignItems: "center",
-                ...rs,
+                ...rowStyle,
               }}
             >
-              {/* Time + Label */}
-              <View style={{ width: 36 }}>
+              {/* Time */}
+              <View style={{ width: 38 }}>
                 <Text
                   style={{
                     fontSize: 8,
                     fontFamily: "Helvetica-Bold",
-                    color: s.isKey ? colors.ocean : s.isMeds ? colors.warmOrange : colors.textDark,
+                    color: s.key ? colors.ocean : s.med ? colors.warmOrange : colors.textDark,
                   }}
                 >
                   {s.time}
                 </Text>
                 {s.label && (
-                  <Text style={{ fontSize: 4, color: colors.textLight, fontFamily: s.isKey || s.isMeds ? "Helvetica-Bold" : "Helvetica" }}>
+                  <Text style={{ fontSize: 4, color: colors.textLight, fontFamily: s.key || s.med ? "Helvetica-Bold" : "Helvetica" }}>
                     {s.label}
                   </Text>
                 )}
               </View>
 
-              {/* Med/Patient column — sample data or task prompt */}
-              <View style={{ flex: 3 }}>
+              {/* Medication / Dose / Patient column */}
+              <View style={{ flex: 3, paddingLeft: 2 }}>
                 {s.sample ? (
                   <View style={sharedStyles.sampleBox}>
                     <Text style={sharedStyles.sampleText}>{s.sample}</Text>
                   </View>
                 ) : (
-                  <Text style={{ fontSize: 5, color: colors.textLight, fontStyle: "italic" }}>
+                  <Text style={{ fontSize: 5, color: colors.textLight, fontFamily: "Helvetica-Oblique" }}>
                     {s.prompt}
                   </Text>
                 )}
               </View>
 
               {/* Given checkbox */}
-              <View style={{ width: 28, alignItems: "center" }}>
+              <View style={{ width: 26, alignItems: "center" }}>
                 <View
                   style={{
-                    width: 9,
-                    height: 9,
-                    borderWidth: 0.75,
-                    borderColor: s.given ? colors.teal : colors.tealMuted,
+                    width: 9, height: 9, borderWidth: 0.75,
+                    borderColor: s.g ? colors.teal : colors.tealMuted,
                     borderRadius: 1.5,
-                    backgroundColor: s.given ? colors.tealPale : undefined,
-                    justifyContent: "center",
-                    alignItems: "center",
+                    backgroundColor: s.g ? colors.tealPale : undefined,
+                    justifyContent: "center", alignItems: "center",
                   }}
                 >
-                  {s.given && (
-                    <Text style={{ fontSize: 6, color: colors.teal, fontFamily: "Helvetica-Bold" }}>
-                      {"\u2713"}
-                    </Text>
-                  )}
+                  {s.g && <Text style={{ fontSize: 6, color: colors.teal, fontFamily: "Helvetica-Bold" }}>{"\u2713"}</Text>}
                 </View>
               </View>
 
               {/* Charted checkbox */}
-              <View style={{ width: 28, alignItems: "center" }}>
+              <View style={{ width: 26, alignItems: "center" }}>
                 <View
                   style={{
-                    width: 9,
-                    height: 9,
-                    borderWidth: 0.75,
-                    borderColor: s.charted ? colors.teal : colors.tealMuted,
+                    width: 9, height: 9, borderWidth: 0.75,
+                    borderColor: s.c ? colors.teal : colors.tealMuted,
                     borderRadius: 1.5,
-                    backgroundColor: s.charted ? colors.tealPale : undefined,
-                    justifyContent: "center",
-                    alignItems: "center",
+                    backgroundColor: s.c ? colors.tealPale : undefined,
+                    justifyContent: "center", alignItems: "center",
                   }}
                 >
-                  {s.charted && (
-                    <Text style={{ fontSize: 6, color: colors.teal, fontFamily: "Helvetica-Bold" }}>
-                      {"\u2713"}
-                    </Text>
-                  )}
+                  {s.c && <Text style={{ fontSize: 6, color: colors.teal, fontFamily: "Helvetica-Bold" }}>{"\u2713"}</Text>}
                 </View>
               </View>
 
-              {/* Notes line */}
+              {/* Notes column */}
               <View style={{ flex: 2, marginLeft: 3 }}>
                 {s.note ? (
                   <Text style={{ fontSize: 4, color: colors.sampleText, fontFamily: "Helvetica-Oblique", lineHeight: 1.2 }}>
                     {s.note}
                   </Text>
                 ) : (
-                  <View style={{ height: 12, borderBottomWidth: 0.5, borderBottomColor: colors.lightGray }} />
+                  <View style={{ height: 11, borderBottomWidth: 0.5, borderBottomColor: colors.lightGray }} />
                 )}
               </View>
             </View>
@@ -248,28 +236,26 @@ export default function MedicationTimeline() {
         })}
 
         {/* Sample indicator */}
-        <View style={{ flexDirection: "row", alignItems: "center", marginTop: 2, marginBottom: 0 }}>
+        <View style={{ flexDirection: "row", alignItems: "center", marginTop: 2 }}>
           <View style={{ width: 5, height: 5, borderRadius: 2.5, backgroundColor: colors.sampleBlue, marginRight: 2 }} />
           <Text style={{ fontSize: 4, color: colors.sampleText, fontFamily: "Helvetica-Oblique" }}>
-            Blue = sample entries (James Rodriguez, Rm 308-A, post-op R hip ORIF). Shows how a tired RN documents during a busy night.
+            Blue = sample entries (Angela Torres, Rm 415-B, post-op L TKA, pain 6/10, BP 96/58 trending low)
           </Text>
         </View>
 
-        {/* Bottom: Key Med Times + Shift Reminders */}
-        <View style={{ marginTop: 5, flexDirection: "row", gap: 6 }}>
+        {/* Bottom: Key Med Windows + Recurring Tasks */}
+        <View style={{ marginTop: 4, flexDirection: "row", gap: 6 }}>
           <View style={{ flex: 1 }}>
             <Text style={{ fontSize: 6, fontFamily: "Helvetica-Bold", color: colors.teal, marginBottom: 2 }}>
               Key Medication Windows
             </Text>
             {[
-              { t: "1930–2130", d: "Evening scheduled meds" },
-              { t: "2230–0100", d: "Midnight med pass" },
-              { t: "0330–0530", d: "AM med pass + lab draws" },
+              { t: "1930\u20132130", d: "Evening scheduled meds + PRN" },
+              { t: "2230\u20130100", d: "Midnight med pass" },
+              { t: "0330\u20130530", d: "AM med pass + lab draws" },
             ].map((r) => (
               <View key={r.t} style={{ flexDirection: "row", marginBottom: 1 }}>
-                <Text style={{ fontSize: 5, fontFamily: "Helvetica-Bold", color: colors.warmOrange, width: 60 }}>
-                  {r.t}
-                </Text>
+                <Text style={{ fontSize: 5, fontFamily: "Helvetica-Bold", color: colors.warmOrange, width: 60 }}>{r.t}</Text>
                 <Text style={{ fontSize: 5, color: colors.textMid }}>{r.d}</Text>
               </View>
             ))}
@@ -281,7 +267,7 @@ export default function MedicationTimeline() {
             {[
               "Rounding q2h (safety, call lights, fall risk)",
               "Pain reassessment q2h post-med",
-              "I&O count q4h (Foley, drains, PO)",
+              "I&O count q4h (Foley, drains, PO intake)",
               "Turning / repositioning q2h",
               "Daily weight 0600",
             ].map((r) => (
