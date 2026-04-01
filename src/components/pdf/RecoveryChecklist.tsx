@@ -52,7 +52,7 @@ export default function RecoveryChecklist() {
     <Page size="LETTER" style={sharedStyles.page}>
       <View style={sharedStyles.pageHeader}>
         <Text style={sharedStyles.headerBadge}>Recovery &amp; Rest</Text>
-        <Text style={[sharedStyles.pageTitle,{marginTop:5}]}>Post-Shift Sleep Recovery Checklist</Text>
+        <Text style={[sharedStyles.pageTitle,{marginTop:8}]}>Post-Shift Sleep Recovery Checklist</Text>
         <Text style={sharedStyles.pageSubtitle}>Wind-down, blackout, blue-light, nutrition, recovery day planner, sleep log.</Text>
       </View>
       <View style={sharedStyles.tip}>

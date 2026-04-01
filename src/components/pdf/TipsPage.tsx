@@ -31,7 +31,7 @@ export default function TipsPage() {
     <Page size="LETTER" style={sharedStyles.page}>
       <View style={sharedStyles.pageHeader}>
         <Text style={sharedStyles.headerBadge}>Quick Reference</Text>
-        <Text style={[sharedStyles.pageTitle,{marginTop:5}]}>{"\u{1F4A1}"} Night Shift Tips & Nurse Brain</Text>
+        <Text style={[sharedStyles.pageTitle, { marginTop: 8 }]}>Night Shift Tips & Nurse Brain</Text>
         <Text style={sharedStyles.pageSubtitle}>Nutrition, system assessment cues, vitals reference, burnout prevention.</Text>
       </View>
       <View style={sharedStyles.tip}>

@@ -25,7 +25,7 @@ export default function SelfCareTracker() {
     <Page size="LETTER" style={sharedStyles.page}>
       <View style={sharedStyles.pageHeader}>
         <Text style={sharedStyles.headerBadge}>Wellness Tracking</Text>
-        <Text style={[sharedStyles.pageTitle,{marginTop:5}]}>Daily Fatigue & Self-Care Tracker</Text>
+        <Text style={[sharedStyles.pageTitle,{marginTop:8}]}>Daily Fatigue & Self-Care Tracker</Text>
         <Text style={sharedStyles.pageSubtitle}>Rate fatigue 1-10 after each shift. Log triggers, actions, sleep hours, and mood. Patterns reveal what helps.</Text>
       </View>
       <View style={{backgroundColor:colors.softGreenPale,borderLeftWidth:2,borderLeftColor:colors.softGreen,paddingTop:2,paddingBottom:2,paddingLeft:5,paddingRight:5,borderRadius:2,marginBottom:4,flexDirection:"row",alignItems:"center"}}>

@@ -26,7 +26,7 @@ export default function HowToUsePage() {
     <Page size="LETTER" style={sharedStyles.page}>
       <View style={sharedStyles.pageHeader}>
         <Text style={sharedStyles.headerBadge}>Getting Started</Text>
-        <Text style={[sharedStyles.pageTitle, { marginTop: 5 }]}>{"\u{1F4D6}"} How to Use This Bundle</Text>
+        <Text style={[sharedStyles.pageTitle, { marginTop: 8 }]}>How to Use This Bundle</Text>
         <Text style={sharedStyles.pageSubtitle}>8 pages designed as your night shift survival system. Each has a filled sample showing how to use it.</Text>
       </View>
 

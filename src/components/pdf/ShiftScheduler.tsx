@@ -10,7 +10,7 @@ export default function ShiftScheduler() {
     <Page size="LETTER" style={sharedStyles.page}>
       <View style={sharedStyles.pageHeader}>
         <Text style={sharedStyles.headerBadge}>{"\u{1F4C5}"} Shift Planning</Text>
-        <Text style={[sharedStyles.pageTitle, { marginTop: 5 }]}>Rotating Shift Scheduler</Text>
+        <Text style={[sharedStyles.pageTitle, { marginTop: 8 }]}>Rotating Shift Scheduler</Text>
         <Text style={sharedStyles.pageSubtitle}>Plan your 2-3 week night shift rotation. Mark D (Day), N (Night), OFF, or C (Call).</Text>
       </View>
       <View style={sharedStyles.tip}>

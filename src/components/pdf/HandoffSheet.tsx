@@ -33,7 +33,7 @@ export default function HandoffSheet() {
     <Page size="LETTER" style={sharedStyles.page}>
       <View style={sharedStyles.pageHeader}>
         <Text style={sharedStyles.headerBadge}>Patient Safety</Text>
-        <Text style={[sharedStyles.pageTitle,{marginTop:5}]}>{"\u{1F4CB}"} SBAR Patient Handoff / Report Sheet</Text>
+        <Text style={[sharedStyles.pageTitle,{marginTop:8}]}>SBAR Patient Handoff / Report Sheet</Text>
         <Text style={sharedStyles.pageSubtitle}>Use SBAR for clear, concise handoffs to reduce errors. One sheet per patient per shift.</Text>
       </View>
       <View style={{ flexDirection:"row", gap:4, marginBottom:2 }}>
