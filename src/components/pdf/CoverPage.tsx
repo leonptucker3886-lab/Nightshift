@@ -16,7 +16,7 @@ export default function CoverPage() {
             <Text style={{ fontSize: 26, color: colors.tealLight }}>{"\u263E"}</Text>
           </View>
           <Text style={{ fontSize: 32, fontFamily: "Helvetica-Bold", color: colors.white, lineHeight: 1.15, marginBottom: 4 }}>2026 Night Shift</Text>
-          <Text style={{ fontSize: 32, fontFamily: "Helvetica-Bold", color: colors.tealLight, lineHeight: 1.15, marginBottom: 14 }}>Nurse Survival Bundle</Text>
+          <Text style={{ fontSize: 32, fontFamily: "Helvetica-Bold", color: colors.tealLight, lineHeight: 1.15, marginBottom: 14 }}>Nurse Survival Bundle v3</Text>
           <View style={{ width: 40, height: 2, backgroundColor: colors.teal, marginBottom: 14, borderRadius: 1 }} />
           <Text style={{ fontSize: 11, color: colors.oceanLight, lineHeight: 1.5, marginBottom: 2 }}>Shift Scheduler {"\u00B7"} SBAR Handoff {"\u00B7"} Med Timeline</Text>
           <Text style={{ fontSize: 11, color: colors.oceanLight, lineHeight: 1.5 }}>Fatigue Tracker {"\u00B7"} Sleep Recovery {"\u00B7"} Self-Care</Text>
