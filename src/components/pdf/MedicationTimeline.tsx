@@ -1,33 +1,34 @@
 import { Page, View, Text } from "@react-pdf/renderer";
 import { colors, sharedStyles } from "./styles";
 
-// 30-min increment time slots with suggested task prompts
+// 30-min increment time slots with suggested task prompts and sample entries
+// Sample patient: James Rodriguez, 58M, Rm 308-A, post-op R hip ORIF
 const timeSlots = [
-  { time: "1900", label: "Shift Start", prompt: "Get report / SBAR", sample: "", given: false, charted: false, isKey: true },
-  { time: "1930", label: "", prompt: "Rounding \u2014 introduce self to patients", sample: "", given: false, charted: false },
-  { time: "2000", label: "Evening Meds", prompt: "Scheduled meds + PRN pain meds", sample: "Norco 10/325 PO \u2014 Rm 308-A (Rodriguez)", given: true, charted: true, isMeds: true },
-  { time: "2030", label: "", prompt: "Pain reassessment q2h (post-med)", sample: "Rm 308-A: 5/10 \u2192 3/10 after Norco", given: true, charted: true },
-  { time: "2100", label: "", prompt: "I&O count / Foley check", sample: "", given: false, charted: false },
-  { time: "2130", label: "", prompt: "Turning / repositioning (q2h schedule)", sample: "", given: false, charted: false },
-  { time: "2200", label: "", prompt: "Vital signs (or per order)", sample: "", given: false, charted: false },
-  { time: "2230", label: "", prompt: "Rounding \u2014 safety check, call lights", sample: "", given: false, charted: false },
-  { time: "2300", label: "Midnight Meds", prompt: "Scheduled meds (hold caffeine)", sample: "", given: false, charted: false, isMeds: true },
-  { time: "2330", label: "", prompt: "Pain reassessment / comfort check", sample: "", given: false, charted: false },
-  { time: "0000", label: "Midnight", prompt: "Rounding \u2014 fall risk check", sample: "", given: false, charted: false, isKey: true },
-  { time: "0030", label: "", prompt: "I&O count / intake check", sample: "", given: false, charted: false },
-  { time: "0100", label: "", prompt: "Turning / repositioning", sample: "", given: false, charted: false },
-  { time: "0130", label: "", prompt: "Cluster care \u2014 check all patients", sample: "", given: false, charted: false },
-  { time: "0200", label: "", prompt: "Rounding \u2014 safety, call lights", sample: "", given: false, charted: false },
-  { time: "0230", label: "", prompt: "Pain reassessment q2h", sample: "", given: false, charted: false },
-  { time: "0300", label: "", prompt: "Vital signs (or per order)", sample: "", given: false, charted: false },
-  { time: "0330", label: "", prompt: "I&O count", sample: "", given: false, charted: false },
-  { time: "0400", label: "AM Meds / Labs", prompt: "Scheduled meds + AM lab draws", sample: "", given: false, charted: false, isMeds: true },
-  { time: "0430", label: "", prompt: "Pain reassessment / comfort", sample: "", given: false, charted: false },
-  { time: "0500", label: "Vitals", prompt: "AM vital signs (all patients)", sample: "", given: false, charted: false },
-  { time: "0530", label: "", prompt: "Turning / repositioning", sample: "", given: false, charted: false },
-  { time: "0600", label: "AM Assess", prompt: "Full assessment + I&O totals", sample: "", given: false, charted: false },
-  { time: "0630", label: "", prompt: "Chart review / orders check", sample: "", given: false, charted: false },
-  { time: "0700", label: "Shift End", prompt: "Give report / SBAR", sample: "", given: false, charted: false, isKey: true },
+  { time: "1900", label: "Shift Start", prompt: "Get report / SBAR", sample: "", note: "", given: false, charted: false, isKey: true },
+  { time: "1930", label: "", prompt: "Rounding \u2014 introduce self to patients", sample: "Rounding done \u2014 all 5 patients stable", note: "Rm 308-A requesting pain med", given: true, charted: true },
+  { time: "2000", label: "Evening Meds", prompt: "Scheduled meds + PRN pain meds", sample: "Norco 10/325 PO \u2014 Rm 308-A (Rodriguez)", note: "Pt rates pain 5/10 R hip", given: true, charted: true, isMeds: true },
+  { time: "2030", label: "", prompt: "Pain reassessment q2h (post-med)", sample: "Rm 308-A: 5/10 \u2192 3/10 after Norco", note: "Pt resting comfortably", given: true, charted: true },
+  { time: "2100", label: "", prompt: "I&O count / Foley check", sample: "Rm 308-A Foley: 200mL since 1900", note: "UOP adequate", given: true, charted: true },
+  { time: "2130", label: "", prompt: "Turning / repositioning (q2h)", sample: "", note: "", given: false, charted: false },
+  { time: "2200", label: "", prompt: "Vital signs (or per order)", sample: "Rm 308-A: T37.2 HR76 BP134/80 RR16 SpO2 96%", note: "Vitals stable, no concerns", given: true, charted: true },
+  { time: "2230", label: "", prompt: "Rounding \u2014 safety check, call lights", sample: "Rounding done \u2014 all call lights within reach", note: "", given: true, charted: false },
+  { time: "2300", label: "Midnight Meds", prompt: "Scheduled meds (hold caffeine)", sample: "Lovenox 40mg SQ \u2014 Rm 308-A. Metoprolol 25mg PO \u2014 Rm 310.", note: "", given: true, charted: true, isMeds: true },
+  { time: "2330", label: "", prompt: "Pain reassessment / comfort check", sample: "", note: "", given: false, charted: false },
+  { time: "0000", label: "Midnight", prompt: "Rounding \u2014 fall risk check", sample: "Rounding done \u2014 Rm 312 call light on floor (fixed)", note: "Rm 308-A sleeping", given: true, charted: true, isKey: true },
+  { time: "0030", label: "", prompt: "I&O count / intake check", sample: "", note: "", given: false, charted: false },
+  { time: "0100", label: "", prompt: "Turning / repositioning", sample: "Rm 308-A turned to L side", note: "Pt awake briefly, repositioned", given: true, charted: true },
+  { time: "0130", label: "", prompt: "Cluster care \u2014 check all patients", sample: "", note: "", given: false, charted: false },
+  { time: "0200", label: "", prompt: "Rounding \u2014 safety, call lights", sample: "", note: "", given: false, charted: false },
+  { time: "0230", label: "", prompt: "Pain reassessment q2h", sample: "Rm 308-A: 4/10 \u2014 requesting PRN", note: "Pt awake, wants water + med", given: true, charted: true },
+  { time: "0300", label: "", prompt: "Vital signs (or per order)", sample: "Rm 308-A: T37.3 HR80 BP138/84 RR17 SpO2 95%", note: "SpO2 dipped to 95%, watched \u2192 back to 96%", given: true, charted: true },
+  { time: "0330", label: "", prompt: "I&O count", sample: "", note: "", given: false, charted: false },
+  { time: "0400", label: "AM Meds / Labs", prompt: "Scheduled meds + AM lab draws", sample: "CBC/CMP drawn Rm 308-A. Metoprolol Rm 310.", note: "Lab results pending", given: true, charted: true, isMeds: true },
+  { time: "0430", label: "", prompt: "Pain reassessment / comfort", sample: "", note: "", given: false, charted: false },
+  { time: "0500", label: "Vitals", prompt: "AM vital signs (all patients)", sample: "Rm 308-A: T37.1 HR78 BP136/82 RR16 SpO2 96%", note: "Vitals stable. Pt sleeping.", given: true, charted: true },
+  { time: "0530", label: "", prompt: "Turning / repositioning", sample: "", note: "", given: false, charted: false },
+  { time: "0600", label: "AM Assess", prompt: "Full assessment + I&O totals", sample: "Rm 308-A: 800mL UOP total. Drain 30mL. Weight 92kg.", note: "I&O documented. Weight stable.", given: true, charted: true },
+  { time: "0630", label: "", prompt: "Chart review / orders check", sample: "", note: "", given: false, charted: false },
+  { time: "0700", label: "Shift End", prompt: "Give report / SBAR", sample: "Report given to day RN (Johnson). SBAR complete.", note: "No outstanding concerns.", given: true, charted: true, isKey: true },
 ];
 
 export default function MedicationTimeline() {
@@ -233,18 +234,26 @@ export default function MedicationTimeline() {
               </View>
 
               {/* Notes line */}
-              <View
-                style={{
-                  flex: 2,
-                  height: 12,
-                  borderBottomWidth: s.sample ? 0 : 0.5,
-                  borderBottomColor: colors.lightGray,
-                  marginLeft: 3,
-                }}
-              />
+              <View style={{ flex: 2, marginLeft: 3 }}>
+                {s.note ? (
+                  <Text style={{ fontSize: 4, color: colors.sampleText, fontFamily: "Helvetica-Oblique", lineHeight: 1.2 }}>
+                    {s.note}
+                  </Text>
+                ) : (
+                  <View style={{ height: 12, borderBottomWidth: 0.5, borderBottomColor: colors.lightGray }} />
+                )}
+              </View>
             </View>
           );
         })}
+
+        {/* Sample indicator */}
+        <View style={{ flexDirection: "row", alignItems: "center", marginTop: 2, marginBottom: 0 }}>
+          <View style={{ width: 5, height: 5, borderRadius: 2.5, backgroundColor: colors.sampleBlue, marginRight: 2 }} />
+          <Text style={{ fontSize: 4, color: colors.sampleText, fontFamily: "Helvetica-Oblique" }}>
+            Blue = sample entries (James Rodriguez, Rm 308-A, post-op R hip ORIF). Shows how a tired RN documents during a busy night.
+          </Text>
+        </View>
 
         {/* Bottom: Key Med Times + Shift Reminders */}
         <View style={{ marginTop: 5, flexDirection: "row", gap: 6 }}>

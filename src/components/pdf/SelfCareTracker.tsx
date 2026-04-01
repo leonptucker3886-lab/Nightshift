@@ -13,7 +13,7 @@ const fatigueScale = [
 
 const actions = ["Hydrate", "Stretch", "Protein snack", "Breathing", "Micro-nap", "Walk"];
 
-// Sample entries from tough shifts
+// Sample entries showing a tough week + recovery
 const sampleShifts = [
   {
     date: "03/31 Night",
@@ -34,10 +34,10 @@ const sampleShifts = [
     actions: [true, true, false, false, false, true],
   },
   {
-    date: "",
-    fatigue: "",
-    triggers: "",
-    actions: [false, false, false, false, false, false],
+    date: "03/28 Recovery",
+    fatigue: "3",
+    triggers: "Day off. Nap 90min. Walked 20min. Felt reset.",
+    actions: [true, true, true, true, true, true],
   },
   {
     date: "",
